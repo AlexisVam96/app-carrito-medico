@@ -63,7 +63,7 @@
 			 		<tbody>
 			 			<c:forEach var="car" items="${carrito}" varStatus="iterator">
 			 			<tr>
-			 				<td>${iterator.index+1}</td>
+			 				<td>00${iterator.index+1}</td>
 			 				<td>${car.getNombres()}</td>
 			 				<td style="font-size: x-small;">${car.getDescripcion()}
 			 					<img src="${car.getImagen() }" width="100" height="80">

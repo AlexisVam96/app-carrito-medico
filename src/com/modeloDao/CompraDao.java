@@ -104,6 +104,7 @@ public class CompraDao {
 				c.setFecha(rs.getString(4));
 				c.setMonto(rs.getDouble(5));
 				c.setEstado(rs.getString(6));
+				c.setDomicilio(rs.getString(7));
 				compras.add(c);
 			}
 		} catch (Exception e) {
@@ -115,7 +116,7 @@ public class CompraDao {
 	
 	public int GenerarCompra(Compra compra) {
 		int idcompras;
-		String sql="insert into compras (idCliente,FechaCompras,Monto,Estado,idPago) values (?,?,?,?,?)";
+		String sql="insert into compras (idCliente,FechaCompras,Monto,Estado,Domicilio,idPago) values (?,?,?,?,?,?)";
 		try {
 			con=cn.getConnection();
 			ps=(PreparedStatement) con.prepareStatement(sql);
@@ -123,7 +124,8 @@ public class CompraDao {
 			ps.setString(2, compra.getFecha());
 			ps.setDouble(3, compra.getMonto());
 			ps.setString(4, compra.getEstado());
-			ps.setInt(5, compra.getIdpago());
+			ps.setString(5, compra.getDomicilio());
+			ps.setInt(6, compra.getIdpago());
 			r=ps.executeUpdate();
 			
 			sql="select @@IDENTITY AS idCompras";
@@ -141,7 +143,7 @@ public class CompraDao {
 				r=ps.executeUpdate();
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("eror en la base de datos" +e.getMessage());
 		}
 		return r;
 	}

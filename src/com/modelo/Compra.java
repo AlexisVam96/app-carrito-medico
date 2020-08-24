@@ -9,13 +9,15 @@ public class Compra {
 	private String fecha;
 	private Double monto;
 	private String estado;
-	
+	private String domicilio;
+
 	private List<Carrito> detalleCompras;
-	
+
 	public Compra() {
 		super();
 	}
-	public Compra( int id_cliente, int idpago, String fecha, Double monto, String estado,
+
+	public Compra(int id_cliente, int idpago, String fecha, Double monto, String estado, String domicilio,
 			List<Carrito> detalleCompras) {
 		super();
 		this.id_cliente = id_cliente;
@@ -23,7 +25,23 @@ public class Compra {
 		this.fecha = fecha;
 		this.monto = monto;
 		this.estado = estado;
+		this.domicilio = domicilio;
 		this.detalleCompras = detalleCompras;
+	}
+
+	/*
+	 * public Compra( int id_cliente, int idpago, String fecha, Double monto, String
+	 * estado, List<Carrito> detalleCompras) { super(); this.id_cliente =
+	 * id_cliente; this.idpago = idpago; this.fecha = fecha; this.monto = monto;
+	 * this.estado = estado; this.detalleCompras = detalleCompras; }
+	 * 
+	 */
+	public String getDomicilio() {
+		return domicilio;
+	}
+
+	public void setDomicilio(String domicilio) {
+		this.domicilio = domicilio;
 	}
 
 	public int getId() {
@@ -81,6 +99,5 @@ public class Compra {
 	public void setDetalleCompras(List<Carrito> detalleCompras) {
 		this.detalleCompras = detalleCompras;
 	}
-	
-	
+
 }

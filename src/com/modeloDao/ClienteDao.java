@@ -50,10 +50,12 @@ public class ClienteDao {
 			ps.setString(2, pass);
 			rs=ps.executeQuery();
 			while(rs.next()) {
-				cl.setId(rs.getInt("idCliente"));
-				cl.setCorreo(rs.getString("Email"));
-				cl.setPassword(rs.getString("Password"));
-				cl.setNombre(rs.getString("Nombres"));
+				cl.setId(rs.getInt(1));
+				cl.setDni(rs.getString(2));
+				cl.setNombre(rs.getString(3));
+				cl.setDireccion(rs.getString(4));
+				cl.setCorreo(rs.getString(5));
+				cl.setPassword(rs.getString(6));
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -67,11 +67,11 @@
 					</div>
 					<div class="form-group">
 						<label>Precio:</label>
-						<input type="text" value="$.${producto.getPrecio() }0" name="txtPrecio" class="form-control">
+						<input type="text" value="${producto.getPrecio()}" name="txtPrecio" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>Stock:</label>
-						<input type="text" value="${producto.getStock() }" name="txtStock" class="form-control">
+						<input type="text" value="${producto.getStock()}" name="txtStock" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>Imagen del Producto:</label>
@@ -94,7 +94,6 @@
 						<th>DESCRIPCIÓN</th>
 						<th>PRECIO</th>
 						<th>STOCK</th>
-						<th>ACCIÓN</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -106,10 +105,6 @@
 						<td>${pro.getDescripcion()}</td>	
 						<td>$.${pro.getPrecio()}0</td>	
 						<td>${pro.getStock()}</td>	
-						<td>
-							<a class="btn btn-warning" href="Controlador?accion=EditarProducto&id=${pro.getId()}">Editar</a>
-							<a class="btn btn-danger" href="Controlador?accion=EliminarProducto&id=${pro.getId()}">Delete</a>
-						</td>
 					</tr>
 					</c:forEach>
 				</tbody>

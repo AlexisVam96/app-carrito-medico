@@ -51,7 +51,7 @@
 			</ul>
 		</div>
 	</nav>
-	<div style="padding: 0 150px; padding-top: 15px;">
+	<div class="container col-sm-10" style="padding: 0 150px; padding-top: 15px;">
 		<div class="card col-sm-12" style="padding: 0; margin: 0;">
 			<div class="card-header">
 				<h2>Detalle de mi Compra</h2>
@@ -62,8 +62,7 @@
 					<thead>
 						<tr>
 							<th>Item</th>
-							<th>Nombre</th>
-							<th>Imagen</th>
+							<th>Producto</th>
 							<th>Precio</th>
 							<th>Cantidad</th>
 							<th>Subtotal</th>
@@ -72,12 +71,13 @@
 					<tbody>
 						<c:forEach var="det" items="${detalles}" varStatus="iterator">
 							<tr>
-								<td>${iterator.index+1 }</td>
-								<td>${det.getNombre() }</td>
-								<td><img src="${det.getImagen() }" width="100" height="100"></td>
-								<td>${det.getPrecio() }</td>
+								<td>00${iterator.index+1 }</td>
+								<td>${det.getNombre() }
+									<img style="display: block; margin:auto ;" src="${det.getImagen() }" width="80" height="80">
+								</td>
+								<td>S/${det.getPrecio() }0</td>
 								<td>${det.getCantidad() }</td>
-								<td>${det.getSubtotal() }</td>
+								<td>S/${det.getSubtotal() }0</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -85,8 +85,8 @@
 			</div>
 			
 			<div class="card-footer">
-				<label style="margin-left: 1000px;">Sub Total: </label> 
-				<input style="margin-left: 1000px;" type="text" value="${totalPago}" readonly="">
+				<label style="margin-left: 750px;">Sub Total: </label> 
+				<input style="margin-left: 750px;" type="text" value="${totalPago}" readonly="">
 			</div>
 		</div>
 	</div>

@@ -2,15 +2,15 @@ $(document).ready(function (){
 	$("tr #btnDelete").click(function (){
 		var idp =$(this).parent().find("#idp").val();
 		swal({
-			title: "Esta Seguro de Eliminar",
-			text: "Una vez eliminado, no hay vuelta atras",
+			title: "Está seguro de eliminar el producto",
+			text: "Desea eliminar el producto",
 			icon: "warning",
 			buttons: true,
 			dangerMode: true,
 		}).then((willDelete) => {
 				if (willDelete) {
 					eliminar(idp);
-					swal("Lista del Carrito Eliminado", {
+					swal("Producto Eliminado", {
 					icon: "success",
 					}).then((WillDelete) => {
 						if(WillDelete){
@@ -18,7 +18,7 @@ $(document).ready(function (){
 						}
 					});
 				} else {
-					swal("Registro no Eliminado");
+					swal("Producto no Eliminado");
 				}
 			});
 	});

@@ -25,12 +25,10 @@ import com.modelo.Compra;
 import com.modelo.Detalle;
 import com.modelo.Pago;
 import com.modelo.Producto;
-import com.modelo.Venta;
 import com.modeloDao.ClienteDao;
 import com.modeloDao.CompraDao;
 import com.modeloDao.PagoDao;
 import com.modeloDao.ProductoDao;
-import com.modeloDao.VentaDao;
 
 
 /**
@@ -45,6 +43,8 @@ public class Controlador extends HttpServlet {
 	Compra compra=new Compra();
 	CompraDao comDao=new CompraDao();
 	List<Compra> compras=new ArrayList<>();
+	
+	List<Compra> ventas=new ArrayList<>();
     
 	Cliente cliente=new Cliente();
 	ClienteDao clienteDao=new ClienteDao();
@@ -61,11 +61,7 @@ public class Controlador extends HttpServlet {
 	ClienteDao cdao=new ClienteDao();
 	
 	List<Carrito> listaCarrito=new ArrayList<>();
-	
-	Venta v=new Venta();
-	VentaDao vdao=new VentaDao();
-	List<Venta> ventas=new ArrayList<>();
-	
+
 	int id_pago;
     double totalPagar=0.0;
     int cantidad=1;
@@ -87,7 +83,6 @@ public class Controlador extends HttpServlet {
     	String menu=request.getParameter("menu");
 		String accion=request.getParameter("accion");
 		productos=pdao.listar();
-		ventas = vdao.listarVentas();
 					
 		if(menu.equals("Producto")) {
 			switch (accion) {
@@ -194,8 +189,7 @@ public class Controlador extends HttpServlet {
 	                    p.setId(idp);
 	                    pdao.actualizar(p);
 	                } catch (Exception e) {
-	                }
-	                
+	                } 
 					request.getRequestDispatcher("Controlador?menu=Producto&accion=Listar").forward(request, response);
 					break;
 				default:
@@ -229,8 +223,14 @@ public class Controlador extends HttpServlet {
 				case "Salir":
 						cliente = new Cliente();
 						session.setAttribute("cliente", cliente);
-						request.getRequestDispatcher("index.jsp").forward(request, response);
+						request.getRequestDispatcher("Controlador?menu=home&accion=Listar").forward(request, response);
 					break;
+				case "Ventas":
+					ventas=comDao.listar_compras();
+					request.setAttribute("ventas", ventas);
+					request.setAttribute("cliente", cliente);
+					request.getRequestDispatcher("ventas.jsp").forward(request, response);
+				break;
 					
 				case "Compras":
 					compras=comDao.listar_compras_id(cliente.getId());
@@ -385,7 +385,6 @@ public class Controlador extends HttpServlet {
 					request.getRequestDispatcher("Controlador?menu=home&accion=Listar").forward(request, response);
 					break;
 				case "Pagar":
-					String nombres=request.getParameter("txtNombres");
 					String tarjeta= request.getParameter("txtTarjeta");
 					String codigo=request.getParameter("txtCodigo");
 					pago.setTarjeta(tarjeta);
@@ -420,11 +419,10 @@ public class Controlador extends HttpServlet {
 						int sac=pr.getStock()-cantidad;
 						prdao.actualizarstock(idproduct, sac);
 					}
-					
-					//Cliente cliente=new Cliente();
-					//cliente.setId(1);
+					System.out.println(cliente.getDireccion());
 					CompraDao dao=new CompraDao();
-					Compra compra=new Compra(cliente.getId(),pago1.getId(), FechaHora.fechaHoraBD(), totalPagar, "Cancelado", listaCarrito);
+					Compra compra=new Compra(cliente.getId(),pago1.getId(), FechaHora.fechaHoraBD(), totalPagar, "Cancelado", cliente.getDireccion() , listaCarrito);
+					//Compra compra=new Compra(cliente.getId(),pago1.getId(), FechaHora.fechaHoraBD(), totalPagar, "Cancelado", listaCarrito);
 					int res=dao.GenerarCompra(compra);
 					if (res!=0&&totalPagar>0) {
 						request.getRequestDispatcher("mensaje.jsp").forward(request, response);

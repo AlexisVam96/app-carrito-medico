@@ -20,6 +20,8 @@
 		<a class="navbar-brand" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> MEDIFAST </a>
   		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
        		<a  class="dropdown-item" href="Controlador?menu=Producto&accion=Listar">Productos</a>
+       		<div class="divider"></div>
+       		<a  class="dropdown-item" href="Controlador?menu=home&accion=Ventas">Ventas</a>
         </div>
   		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
    		<span class="navbar-toggler-icon"></span>

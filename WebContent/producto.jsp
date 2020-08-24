@@ -64,7 +64,7 @@
 				<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>ID</th>
+						<th>CODIGO</th>
 						<th>NOMBRE</th>
 						<th>IMAGEN</th>
 						<th>DESCRIPCIÓN</th>
@@ -76,11 +76,11 @@
 				<tbody>
 					<c:forEach var="pro" items="${productos}">	
 					<tr>
-						<td>${pro.getId()}</td>
+						<td>P00${pro.getId()}</td>
 						<td>${pro.getNombre()}</td>
 						<td><img src="${pro.getFoto()}" width="80" height="80"></td>
 						<td>${pro.getDescripcion()}</td>	
-						<td>$.${pro.getPrecio()}0</td>	
+						<td>S/${pro.getPrecio()}0</td>	
 						<td>${pro.getStock()}</td>	
 						<td>
 							<a class="btn btn-warning" href="Controlador?menu=Producto&accion=Editar&id=${pro.getId()}" >Editar</a>
@@ -112,7 +112,8 @@
 						</div>
 						<div class="form-group">
 							<label>Descripción:</label>
-							<input type="text"  name="txtDescripcion" class="form-control">
+							<textarea type="text"  name="txtDescripcion" class="form-control"></textarea>
+							<!-- <input type="text"  name="txtDescripcion" class="form-control"> -->
 						</div>
 						<div class="form-group">
 							<label>Precio:</label>
