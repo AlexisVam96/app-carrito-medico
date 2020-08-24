@@ -11,8 +11,9 @@
 	crossorigin="anonymous">
 <link href="css/estilos.css" rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
-<body>
+<body style="font-family: cursive;">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<a class="navbar-brand" href="Controlador?menu=home&accion=Listar">Vampi
 			Store</a>
@@ -26,9 +27,9 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link"
-					href="Controlador?menu=home&accion=Listar">Home <span
+					href="Controlador?menu=home&accion=Listar"><i class="fas fa-home"></i>Home <span
 						class="sr-only">(current)</span></a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Ofertas
+				<li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-plus-circle"></i>Ofertas
 						del Dia</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="Controlador?menu=home&accion=Listar">Seguir Comprando</a></li>
@@ -39,9 +40,6 @@
 					${cliente.getNombre() }
 				</a>
 				<div class="dropdown-menu text-center dropdown-menu-right">
-					<a class="dropdown-item" href="#"><img src="" alt="60"
-						height="60" /></a> <a class="dropdown-item" href="#">${cliente.getCorreo() }</a>
-					<div class="dropdown-divider"></div>
 					<a class="dropdown-item"
 						href="Controlador?menu=home&accion=Compras">Mis Compras</a>
 					<div class="dropdown-divider"></div>
@@ -85,8 +83,7 @@
 			</div>
 			
 			<div class="card-footer">
-				<label style="margin-left: 750px;">Sub Total: </label> 
-				<input style="margin-left: 750px;" type="text" value="${totalPago}" readonly="">
+				<label style="margin-left: 700px;">Monto Total: <i style="margin-left: 20px;">S/${totalPago}0</i> </label> 
 			</div>
 		</div>
 	</div>

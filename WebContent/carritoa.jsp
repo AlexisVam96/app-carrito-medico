@@ -11,28 +11,45 @@
 	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <body style="font-family: cursive;">
+
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  		<a class="navbar-brand" href="Controlador?menu=home&accion=Listar">MEDIFAST</a>
+				<!--  -->
+		<a class="navbar-brand" href="#"  role="button"aria-haspopup="true" aria-expanded="false"> MEDIFAST </a>
   		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
    		<span class="navbar-toggler-icon"></span>
   		</button>
-
-  		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-    		<ul class="navbar-nav mr-auto">
-      			<li class="nav-item active">
-       				<a class="nav-link" href="Controlador?menu=home&accion=Listar"><i class="fas fa-home"></i>Home <span class="sr-only">(current)</span></a>
-      			</li>
-     			<li class="nav-item">
-        			<a class="nav-link" href="#"><i class="fas fa-plus-circle"></i>Ofertas del Dia</a>
-      			</li>
-      			<li class="nav-item">
-       				<a class="nav-link" href="Controlador?menu=home&accion=Listar" ><i class="fas fa-plus-circle"></i>Seguir Comprando</a>
-      			</li>
-    		</ul>
-    		<ul class="navbar-nav btn-group my-2 my-lg-0" role="group">
-				<a class="btn btn-outline-info" style="color: white;" data-toggle="modal" data-target="#login"> <i class="fas fa-user-tie"></i> Iniciar Session</a>
+		
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link"
+					href="Controlador?menu=ADMIN&accion=Listar"><i class="fas fa-home"></i>Home <span
+						class="sr-only">(current)</span></a></li>
+				<li class="nav-item active"><a class="nav-link" href="#"><i class="fas fa-plus-circle"></i>Ofertas
+						del Dia</a></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="Controlador?menu=ADMIN&accion=Carrito"><i
+						class="fas fa-cart-plus">(<label style="color: orange;">${contador}</label>)
+					</i>Carrito</a></li>
+				<li class="nav-item active"><a class="nav-link" href="Controlador?menu=Producto&accion=Listar"><i class="fas fa-plus-circle"></i>Productos</a></li>
+				<li class="nav-item active"><a class="nav-link" href="Controlador?menu=home&accion=Ventas"><i class="fas fa-plus-circle"></i>Ventas</a></li>
 			</ul>
-  		</div>
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" id="txtBuscar">
+					<button class="btn btn-outline-info my-2 my-sm-0" id="btnBuscar">
+						<i class="fas fa-search"></i> Buscar
+					</button>
+				</form>
+			</ul>
+			<ul class="navbar-nav btn-group my-2 my-lg-0" role="group">
+				<a style="color: white; cursor: pointer" class="dropdown-toggle" data-toggle="dropdown"> <i class="fas fa-user-tie"></i>${cliente.getNombre()}</a>
+				<div class="dropdown-menu text-center dropdown-menu-right">
+					<a class="dropdown-item" href="Controlador?menu=ADMIN&accion=Salir">
+						<i class="fas fa-arrow-right"> Salir</i>
+					</a>
+				</div>
+			</ul>
+		</div>
 	</nav>
 	<div class="container mt-4">
 		<h3>Carrito</h3><br>
@@ -61,12 +78,12 @@
 			 				<td>S/${car.getPrecioCompra()}0</td>
 			 				<td>
 			 					<input type="hidden" id="idpro" value="${car.getIdProducto() }">
-			 					<input type="number" id="Cantidad" value="${car.getCantidad()}" class="form-control" min="1"  >
+			 					<input type="number" id="CantidadA" value="${car.getCantidad()}" class="form-control" min="1"  >
 			 				</td>
 			 				<td>S/${car.getSubTotal()}0</td>
 			 				<td style="text-align:center;">
 			 					<input type="hidden" id="idp" value="${car.getIdProducto()}">
-			 					<a class="btn btn-outline-dark" href="#" id="btnDelete"><img src="https://img.icons8.com/ios-filled/50/000000/delete.png" width="20" height="20"/></a>
+			 					<a class="btn btn-outline-dark"  id="btnDeletea"><img src="https://img.icons8.com/ios-filled/50/000000/delete.png" width="20" height="20"/></a>
 			 				</td>
 			 			</tr>
 			 			</c:forEach>
@@ -95,44 +112,6 @@
 			</div>
 		</div>
 	</div>
-	
-	<div class="modal fade" id="login" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-sm">
-			<div class="modal-content">
-				<div class="modal-body">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<form class="form-sign" action="Controlador?menu=home"
-						method="POST">
-						<div class="form-group text-center">
-							<img src="img/img.png" height="80" width="80" />
-						</div>
-						<div class="form-group">
-							<label>Email:</label> <input type="email" name="txtCorreo"
-								class="form-control">
-						</div>
-						<div class="form-group">
-							<label>Password:</label> <input type="password" name="txtPass"
-								class="form-control">
-						</div>
-						<div class="form-group">
-							<input type="submit" name="accion" value="Login"
-								class="btn btn-outline-dark btn-block">
-						</div>
-						<div class="form-group">
-							<a class="btn btn-outline-dark btn-block " href="#"
-								data-toggle="modal" data-target="#modalRegistrar">
-								Registrese aquí </a>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	
 	
 	<!-- MODAL PAGAR PRODUCTO -->
 	

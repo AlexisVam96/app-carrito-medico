@@ -8,49 +8,42 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link href="css/estilos.css" rel="stylesheet" type="text/css"/>
 	<title>Insert title here</title>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
-<body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  		<a class="navbar-brand" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Vampi Store </a>
-  		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-       		<a  class="dropdown-item" href="Controlador?menu=Producto&accion=Listar">Productos</a>
-       		<div  class="dropdown-divider"></div>
-          	<a class="dropdown-item" href="#">Clientes</a>
-         	<div  class="dropdown-divider"></div>
-          	<a class="dropdown-item" href="Controlador?menu=Ventas">Ventas</a>
-        </div>
+<body style="font-family: cursive;">
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+				<!--  -->
+		<a class="navbar-brand" href="#"  role="button"aria-haspopup="true" aria-expanded="false"> MEDIFAST </a>
   		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
    		<span class="navbar-toggler-icon"></span>
   		</button>
-
-  		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-    		<ul class="navbar-nav mr-auto">
-      			<li class="nav-item active">
-       				<a class="nav-link" href="Controlador?menu=home&accion=Listar">Home <span class="sr-only">(current)</span></a>
-      			</li>
-     			<li class="nav-item">
-        			<a class="nav-link" href="#">Ofertas del Dia</a>
-      			</li>
-      			<li class="nav-item">
-       				<a class="nav-link" href="Controlador?menu=home&accion=Listar" >Seguir Comprando</a>
-      			</li>
-    		</ul>
-    		<form class="form-inline my-2 my-lg-0" >
-      			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-   			</form>
-   			<ul class="navbar-nav">
-   				<li class="nav-item active dropdown">
-        		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> ${nom } </a>
-        			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          				<a class="dropdown-item" href="#">Accion 1</a>
-          				<a class="dropdown-item" href="#">Accion 2</a>
-         				<div class="dropdown-divider"></div>
-          				<a class="dropdown-item" href="#">Accion 3</a>
-        			</div>
-      			</li>
-   			</ul>
-  		</div>
+		
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link"
+					href="Controlador?menu=ADMIN&accion=Listar"><i class="fas fa-home"></i>Home <span
+						class="sr-only">(current)</span></a></li>
+				<li class="nav-item active"><a class="nav-link" href="#"><i class="fas fa-plus-circle"></i>Ofertas
+						del Dia</a></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="Controlador?menu=ADMIN&accion=Carrito"><i
+						class="fas fa-cart-plus">(<label style="color: orange;">${contador}</label>)
+					</i>Carrito</a></li>
+				<li class="nav-item active"><a class="nav-link" href="Controlador?menu=Producto&accion=Listar"><i class="fas fa-plus-circle"></i>Productos</a></li>
+				<li class="nav-item active"><a class="nav-link" href="Controlador?menu=home&accion=Ventas"><i class="fas fa-plus-circle"></i>Ventas</a></li>
+			</ul>
+			<ul class="navbar-nav btn-group my-2 my-lg-0" role="group">
+				<a style="color: white; cursor: pointer" class="dropdown-toggle" data-toggle="dropdown"> <i class="fas fa-user-tie"></i>${cliente.getNombre()}</a>
+				<div class="dropdown-menu text-center dropdown-menu-right">
+					<a class="dropdown-item" href="Controlador?menu=ADMIN&accion=Compras">Mis Compras</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="Controlador?menu=ADMIN&accion=Salir">
+						<i class="fas fa-arrow-right"> Salir</i>
+					</a>
+				</div>
+			</ul>
+		</div>
 	</nav>
 	<div class="d-flex">
 		<div class="card col-sm-4">

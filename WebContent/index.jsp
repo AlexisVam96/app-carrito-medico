@@ -4,36 +4,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-<link href="css/estilos.css" rel="stylesheet" type="text/css" />
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
-<title>Insert title here</title>
+	<meta charset="ISO-8859-1">
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+		crossorigin="anonymous">
+	<link href="css/estilos.css" rel="stylesheet" type="text/css" />
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<title>Insert title here</title>
 </head>
 <body style="font-family: cursive;">
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-				<!--  -->
-		<a class="navbar-brand" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> MEDIFAST </a>
-  		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-       		<a  class="dropdown-item" href="Controlador?menu=Producto&accion=Listar">Productos</a>
-       		<div class="divider"></div>
-       		<a  class="dropdown-item" href="Controlador?menu=home&accion=Ventas">Ventas</a>
-        </div>
-  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-   		<span class="navbar-toggler-icon"></span>
-  		</button>
+		<!--  -->
+		<a class="navbar-brand" href="#" role="button" aria-haspopup="true"
+			aria-expanded="false"> MEDIFAST </a>
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link"
-					href="Controlador?menu=home&accion=Listar">Home <span
-						class="sr-only">(current)</span></a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Ofertas
-						del Dia</a></li>
+					href="Controlador?menu=home&accion=Listar"><i
+						class="fas fa-home"></i>Home <span class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link" href="#"><i
+						class="fas fa-plus-circle"></i>Ofertas del Dia</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="Controlador?menu=home&accion=Carrito"><i
 						class="fas fa-cart-plus">(<label style="color: orange;">${contador}</label>)
@@ -42,22 +42,17 @@
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<form class="form-inline my-2 my-lg-0">
 					<input class="form-control mr-sm-2" id="txtBuscar">
-					<button class="btn btn-outline-info my-2 my-sm-0" id="btnBuscar">
+					<button style="color: white;"
+						class="btn btn-outline-info my-2 my-sm-0" id="btnBuscar">
 						<i class="fas fa-search"></i> Buscar
 					</button>
 				</form>
 			</ul>
 			<ul class="navbar-nav btn-group my-2 my-lg-0" role="group">
-				<a style="color: white; cursor: pointer" class="dropdown-toggle" data-toggle="dropdown"> <i class="fas fa-user-tie"></i> Iniciar Session</a>
-				<div class="dropdown-menu text-center dropdown-menu-right">
-					<a class="dropdown-item" href="#" data-toggle="modal" data-target="#login">Ingresar</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="Controlador?menu=home&accion=Compras">Mis Compras</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="Controlador?menu=home&accion=Salir">
-						<i class="fas fa-arrow-right"> Salir</i>
-					</a>
-				</div>
+				<a class="btn btn-outline-info" style="color: white;"
+					data-toggle="modal" data-target="#login"> <i
+					class="fas fa-user-tie"></i> Iniciar Session
+				</a>
 			</ul>
 		</div>
 	</nav>
@@ -76,10 +71,10 @@
 							<p class="card-text">${p.getDescripcion()}</p>
 							<div class="text-center">
 								<a
-								href="Controlador?menu=home&accion=AgregarCarrito&id=${p.getId()}"
-								class="btn btn-outline-info">Agregar a carrito</a> <a
-								href="Controlador?menu=home&accion=Comprar&id=${p.getId()}"
-								class="btn btn-danger">Comprar ahora</a>
+									href="Controlador?menu=home&accion=AgregarCarrito&id=${p.getId()}"
+									class="btn btn-outline-info">Agregar a carrito</a> <a
+									href="Controlador?menu=home&accion=Comprar&id=${p.getId()}"
+									class="btn btn-danger">Comprar ahora</a>
 							</div>
 						</div>
 					</div>

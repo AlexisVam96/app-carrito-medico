@@ -8,10 +8,11 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link href="css/estilos.css" rel="stylesheet" type="text/css"/>
 	<title>Insert title here</title>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
-<body>
+<body style="font-family: cursive;">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  		<a class="navbar-brand" href="Controlador?menu=home&accion=Listar">Vampi Store</a>
+  		<a class="navbar-brand" href="Controlador?menu=home&accion=Listar">MEDIFAST</a>
   		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
    		<span class="navbar-toggler-icon"></span>
   		</button>
@@ -19,25 +20,21 @@
   		<div class="collapse navbar-collapse" id="navbarSupportedContent">
     		<ul class="navbar-nav mr-auto">
       			<li class="nav-item active">
-       				<a class="nav-link" href="Controlador?menu=home&accion=Listar">Home <span class="sr-only">(current)</span></a>
+       				<a class="nav-link" href="Controlador?menu=USER&accion=Listar"><i class="fas fa-home"></i>Home <span class="sr-only">(current)</span></a>
       			</li>
      			<li class="nav-item">
-        			<a class="nav-link" href="#">Ofertas del Dia</a>
+        			<a class="nav-link" href="#"><i class="fas fa-plus-circle"></i>Ofertas del Dia</a>
       			</li>
       			<li class="nav-item">
-       				<a class="nav-link" href="Controlador?menu=home&accion=Listar" >Seguir Comprando</a>
+       				<a class="nav-link" href="Controlador?menu=USER&accion=Listar" ><i class="fas fa-plus-circle"></i>Seguir Comprando</a>
       			</li>
     		</ul>
-    		<ul class="navbar-nav btn-group my-2 my-lg-0" role="group">
-				<a style="color: white; cursor: pointer" class="dropdown-toggle"
-					data-toggle="dropdown"> <i class="fas fa-user-tie"></i> ${cliente.getNombre() }</a>
+   			<ul class="navbar-nav btn-group my-2 my-lg-0" role="group">
+				<a style="color: white; cursor: pointer" class="dropdown-toggle" data-toggle="dropdown"> <i class="fas fa-user-tie"></i> ${cliente.getNombre() }</a>
 				<div class="dropdown-menu text-center dropdown-menu-right">
-					<a class="dropdown-item" href="#"><img src="" alt="60" height="60" /></a> 
-					<a class="dropdown-item" href="#">${cliente.getCorreo() }</a>
+					<a class="dropdown-item" href="Controlador?menu=USER&accion=Compras">Mis Compras</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="Controlador?menu=home&accion=Compras">Mis Compras</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="Controlador?menu=home&accion=Salir">
+					<a class="dropdown-item" href="Controlador?menu=USER&accion=Salir">
 					<i class="fas fa-arrow-right"> Salir</i>
 					</a>
 				</div>
@@ -47,7 +44,7 @@
 	<div style="padding: 0 150px; padding-top:15px;">
 		<h2>Mis Compras</h2>
 		<div class="col-sm-12 col-md-12 col-xl-12" style="text-align:center;">
-			 	<table class="table table-hover">
+			 	<table class="table table-striped">
 			 		<thead>
 			 			<tr>
 			 				<th>CODIGO DE COMPRA</th>
@@ -61,10 +58,10 @@
 			 		<tbody>
 			 			<c:forEach var="com" items="${compras}">
 			 			<tr>
-			 				<td>${com.getId()}</td>
+			 				<td>C00${com.getId()}</td>
 			 				<td>${com.getFecha()}</td>
-			 				<td>${com.getMonto()}</td>
-			 				<td>${com.getIdpago()}</td>
+			 				<td>S/${com.getMonto()}0</td>
+			 				<td>P00${com.getIdpago()}</td>
 			 				<td>${com.getEstado()}</td>
 			 				<td><a href="Controlador?menu=home&accion=Detalle&id=${com.getId()}">ver detalle</a></td>
 			 			</tr>
