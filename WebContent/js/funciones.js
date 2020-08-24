@@ -2,7 +2,7 @@ $(document).ready(function (){
 	$("tr #btnDelete").click(function (){
 		var idp =$(this).parent().find("#idp").val();
 		swal({
-			title: "Está seguro de eliminar el producto",
+			title: "Esta seguro de eliminar el producto",
 			text: "Desea eliminar el producto",
 			icon: "warning",
 			buttons: true,
@@ -26,7 +26,7 @@ $(document).ready(function (){
 	$("tr #btnDeletea").click(function (){
 		var idp =$(this).parent().find("#idp").val();
 		swal({
-			title: "Está seguro de eliminar el producto",
+			title: "Esta seguro de eliminar el producto",
 			text: "Desea eliminar el producto",
 			icon: "warning",
 			buttons: true,
@@ -50,7 +50,7 @@ $(document).ready(function (){
 	$("tr #btnDeleteb").click(function (){
 		var idp =$(this).parent().find("#idp").val();
 		swal({
-			title: "Está seguro de eliminar el producto",
+			title: "Esta seguro de eliminar el producto",
 			text: "Desea eliminar el producto",
 			icon: "warning",
 			buttons: true,

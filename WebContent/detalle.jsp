@@ -40,9 +40,6 @@
 					${cliente.getNombre() }
 				</a>
 				<div class="dropdown-menu text-center dropdown-menu-right">
-					<a class="dropdown-item"
-						href="Controlador?menu=home&accion=Compras">Mis Compras</a>
-					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="Controlador?menu=home&accion=Salir">
 						<i class="fas fa-arrow-right"> Salir</i>
 					</a>

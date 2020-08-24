@@ -36,8 +36,6 @@
 			<ul class="navbar-nav btn-group my-2 my-lg-0" role="group">
 				<a style="color: white; cursor: pointer" class="dropdown-toggle" data-toggle="dropdown"> <i class="fas fa-user-tie"></i>${cliente.getNombre()}</a>
 				<div class="dropdown-menu text-center dropdown-menu-right">
-					<a class="dropdown-item" href="Controlador?menu=ADMIN&accion=Compras">Mis Compras</a>
-					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="Controlador?menu=ADMIN&accion=Salir">
 						<i class="fas fa-arrow-right"> Salir</i>
 					</a>
