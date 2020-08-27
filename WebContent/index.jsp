@@ -36,19 +36,18 @@
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Categorias </a>
+					aria-expanded="false"><i class="fas fa-plus-circle"></i> Categorias </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<c:forEach var="c" items="${categorias}">
 							<a class="dropdown-item" href="Controlador?menu=home&accion=Categoria&id=${c.getId() }">${c.getNombre() }</a>
 						</c:forEach>
 					</div>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#"><i
-						class="fas fa-plus-circle"></i>Ofertas del Dia</a>
+				<li class="nav-item">
+					<a class="nav-link" href="#"><i class="fas fa-plus-circle"></i>Ofertas del Dia</a>
 				</li>
 				<li class="nav-item"><a class="nav-link"
-					href="Controlador?menu=home&accion=Carrito"><i
-						class="fas fa-cart-plus">(<label style="color: orange;">${contador}</label>)
+					href="Controlador?menu=home&accion=Carrito"><i class="fas fa-cart-plus">(<label style="color: orange;">${contador}</label>)
 					</i>Carrito</a>
 				</li>
 			</ul>

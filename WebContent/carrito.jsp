@@ -35,7 +35,7 @@
   		</div>
 	</nav>
 	<div class="container mt-4">
-		<h3>Carrito</h3><br>
+		<h3><i class="fas fa-cart-plus"></i>Carrito</h3><br>
 		<div class="row">
 			<div class="col-sm-8">
 			 	<table class="table table-hover ">

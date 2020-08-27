@@ -72,6 +72,9 @@ public class Controlador extends HttpServlet {
     Carrito car;
     int pos;
     int r;
+    int temp3;
+    int id_categoria;
+    boolean existe_categoria=false;
 	/**
      *
      * @see HttpServlet#HttpServlet()
@@ -235,7 +238,7 @@ public class Controlador extends HttpServlet {
 					break;
 				case "Salir":
 					cliente = new Cliente();
-					session.setAttribute("cliente", cliente);
+					//session.setAttribute("cliente", cliente);
 					request.getRequestDispatcher("Controlador?menu=home&accion=Nuevo").forward(request, response);
 				break;
 				case "Ventas":
@@ -265,17 +268,18 @@ public class Controlador extends HttpServlet {
 					
 				break;
 				case "Listar":
+					existe_categoria=false;
 					productos=pdao.listar();
 					categorias=pdao.listarCategorias();
 					request.setAttribute("categorias", categorias);
 					request.setAttribute("productos", productos);
 					break;
 				case "Categoria":
-					int temp3=0;
-					int id_pro = Integer.parseInt(request.getParameter("id"));
-					productos=pdao.listarPorCategoria(id_pro);
+					existe_categoria = true;
+					id_categoria = Integer.parseInt(request.getParameter("id"));
+					productos=pdao.listarPorCategoria(id_categoria);
 					for(int i=0; i<categorias.size(); i++) {
-						if(categorias.get(i).getId() == id_pro) {
+						if(categorias.get(i).getId() == id_categoria) {
 							temp3=i;
 						}
 					}
@@ -372,7 +376,13 @@ public class Controlador extends HttpServlet {
 						listaCarrito.add(car);
 					}
 					request.setAttribute("contador", listaCarrito.size());
-					request.getRequestDispatcher("Controlador?menu=home&accion=Listar").forward(request, response);
+					
+					if(existe_categoria) {
+						request.getRequestDispatcher("Controlador?menu=home&accion=Categoria&id="+id_categoria).forward(request, response);
+					}else {
+						request.getRequestDispatcher("Controlador?menu=home&accion=Listar").forward(request, response);
+					}
+					//request.getRequestDispatcher("Controlador?menu=home&accion=Listar").forward(request, response);
 					break;
 				case "Delete":
 					int idproducto=Integer.parseInt(request.getParameter("idp"));
