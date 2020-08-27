@@ -20,6 +20,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.config.FechaHora;
 import com.modelo.Carrito;
+import com.modelo.Categoria;
 import com.modelo.Cliente;
 import com.modelo.Compra;
 import com.modelo.Detalle;
@@ -56,6 +57,8 @@ public class Controlador extends HttpServlet {
 	ProductoDao pdao=new ProductoDao();
 	Producto p=new Producto();
 	List<Producto> productos=new ArrayList<>();
+	
+	List<Categoria> categorias=new ArrayList<>();
 	
 	Cliente cl=new Cliente();
 	ClienteDao cdao=new ClienteDao();
@@ -225,17 +228,7 @@ public class Controlador extends HttpServlet {
 								System.out.println("Error al iniciar session");
 							}
 						}
-						
-						/*	
-						session.setAttribute("cliente", cliente);
-						try {
-							session.getAttribute("cliente").toString();
-							request.getRequestDispatcher("Controlador?menu=home&accion=Listar").forward(request, response);
-						} catch (Exception e) {
-								// TODO: handle exception
-							System.out.println("Error al iniciar session");
-						}**/
-					
+				
 					}else {
 						request.getRequestDispatcher("Controlador?menu=home&accion=Salir").forward(request, response);
 					}	
@@ -273,9 +266,22 @@ public class Controlador extends HttpServlet {
 				break;
 				case "Listar":
 					productos=pdao.listar();
-					//request.setAttribute("cont", listaCarrito.size());
+					categorias=pdao.listarCategorias();
+					request.setAttribute("categorias", categorias);
 					request.setAttribute("productos", productos);
-					//request.getRequestDispatcher("index.jsp").include(request, response);
+					break;
+				case "Categoria":
+					int temp3=0;
+					int id_pro = Integer.parseInt(request.getParameter("id"));
+					productos=pdao.listarPorCategoria(id_pro);
+					for(int i=0; i<categorias.size(); i++) {
+						if(categorias.get(i).getId() == id_pro) {
+							temp3=i;
+						}
+					}
+					request.setAttribute("categorias", categorias);
+					request.setAttribute("nom_categoria", categorias.get(temp3).getNombre());
+					request.setAttribute("productos", productos);
 					break;
 				case "Comprar":
 					totalPagar=0.0;

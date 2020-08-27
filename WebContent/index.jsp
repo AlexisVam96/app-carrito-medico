@@ -4,14 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ISO-8859-1">
-	<link rel="stylesheet"
-		href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-		crossorigin="anonymous">
-	<link href="css/estilos.css" rel="stylesheet" type="text/css" />
-	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
-	<title>Insert title here</title>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link href="css/estilos.css" rel="stylesheet" type="text/css" />
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<title>Insert title here</title>
 </head>
 <body style="font-family: cursive;">
 
@@ -31,13 +31,26 @@
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link"
 					href="Controlador?menu=home&accion=Listar"><i
-						class="fas fa-home"></i>Home <span class="sr-only">(current)</span></a></li>
+						class="fas fa-home"></i>Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Categorias </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<c:forEach var="c" items="${categorias}">
+							<a class="dropdown-item" href="Controlador?menu=home&accion=Categoria&id=${c.getId() }">${c.getNombre() }</a>
+						</c:forEach>
+					</div>
+				</li>
 				<li class="nav-item"><a class="nav-link" href="#"><i
-						class="fas fa-plus-circle"></i>Ofertas del Dia</a></li>
+						class="fas fa-plus-circle"></i>Ofertas del Dia</a>
+				</li>
 				<li class="nav-item"><a class="nav-link"
 					href="Controlador?menu=home&accion=Carrito"><i
 						class="fas fa-cart-plus">(<label style="color: orange;">${contador}</label>)
-					</i>Carrito</a></li>
+					</i>Carrito</a>
+				</li>
 			</ul>
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<form class="form-inline my-2 my-lg-0">
@@ -59,6 +72,7 @@
 
 
 	<div class="container mt-4">
+		<h2>${nom_categoria }</h2>
 		<div class="row">
 			<c:forEach var="p" items="${productos}">
 				<div class="col-sm-4">

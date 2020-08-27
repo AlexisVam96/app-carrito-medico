@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import com.config.Conexion;
+import com.modelo.Categoria;
 import com.modelo.Producto;
 
 
@@ -88,7 +89,7 @@ public class ProductoDao {
 	}
 	
 	public Producto listarId(int id) {
-		String sql="select * from producto where idProducto="+id;
+		String sql="select idProducto, Nombres, Foto, Descripcion, Precio, Stock from producto where idProducto="+id;
 		Producto p=new Producto();
 		try {
 			con=cn.getConnection();
@@ -108,9 +109,52 @@ public class ProductoDao {
 		}
 		return p;
 	}
+	
+	public List<Producto> listarPorCategoria(int id_categoria){
+		List<Producto> productos = new ArrayList<>();
+		String sql = "select idProducto, Nombres, Foto, Descripcion, Precio, Stock  from producto where idCategoria ="+ id_categoria;
+		try {
+			con= cn.getConnection();
+			ps= con.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				Producto p = new Producto();
+				p.setId(rs.getInt(1));
+				p.setNombre(rs.getString(2));
+				p.setFoto(rs.getString(3));
+				p.setDescripcion(rs.getString(4));
+				p.setPrecio(rs.getDouble(5));
+				p.setStock(rs.getInt(6));
+				productos.add(p);
+			}
+		} catch (Exception e) {
+			System.out.println("Erro al listar por categoria "+ e.getMessage());
+		}
+		return productos;
+	}
+	
+	public List<Categoria> listarCategorias() {
+		List<Categoria> categorias=new ArrayList<>();
+		String sql="select * from categorias";
+		try {
+			con=cn.getConnection();
+			ps= con.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				Categoria c = new Categoria();
+				c.setId(rs.getInt(1));
+				c.setNombre(rs.getString(2));
+				categorias.add(c);
+			}
+		}catch(Exception e) {
+			System.out.println("Error al listar las categorias en la bd: "+e.getMessage());
+		}
+		return categorias;
+	}
+	
 	public List<Producto> listar() {
 		List<Producto> productos=new ArrayList<>();
-		String sql="select * from producto";
+		String sql="select idProducto, Nombres, Foto, Descripcion, Precio, Stock  from producto";
 		try {
 			con=cn.getConnection();
 			ps= con.prepareStatement(sql);
@@ -129,6 +173,7 @@ public class ProductoDao {
 		}
 		return productos;
 	}
+	
 	public String urlImg(int id) {
 		String url=null;
 		String sql="select Foto from producto where idProducto="+id;
