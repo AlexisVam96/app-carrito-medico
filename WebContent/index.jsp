@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -16,9 +16,9 @@
 <body style="font-family: cursive;">
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<!--  -->
-		<a class="navbar-brand" href="#" role="button" aria-haspopup="true"
-			aria-expanded="false"> MEDIFAST </a>
+		<!-- <a class="navbar-brand" href="#" role="button" aria-haspopup="true"
+			aria-expanded="false"> MEDIFAST </a> -->
+		
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -29,6 +29,14 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> MEDI FAST</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="Controlador?menu=${products}&accion=Listar">${products}</a>
+						<a class="dropdown-item" href="Controlador?menu=home&accion=${sales}">${sales}</a>
+					</div>
+				</li>
 				<li class="nav-item active"><a class="nav-link"
 					href="Controlador?menu=home&accion=Listar"><i
 						class="fas fa-home"></i>Home <span class="sr-only">(current)</span></a>
@@ -63,7 +71,7 @@
 			<ul class="navbar-nav btn-group my-2 my-lg-0" role="group">
 				<a class="btn btn-outline-info" style="color: white;"
 					data-toggle="modal" data-target="#login"> <i
-					class="fas fa-user-tie"></i> Iniciar Session
+					class="fas fa-user-tie"></i> ${nombre_cliente}
 				</a>
 			</ul>
 		</div>
@@ -107,8 +115,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<form class="form-sign" action="Controlador?menu=home"
-						method="POST">
+					<form class="form-sign" action="Controlador" method="POST">
 						<div class="form-group text-center">
 							<img src="img/img.png" height="80" width="80" />
 						</div>
@@ -121,7 +128,7 @@
 								class="form-control">
 						</div>
 						<div class="form-group">
-							<input type="submit" name="accion" value="Login"
+							<input type="submit" name="menu" value="Login"
 								class="btn btn-outline-dark btn-block">
 						</div>
 						<div class="form-group">
