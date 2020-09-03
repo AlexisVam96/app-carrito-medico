@@ -1,4 +1,5 @@
- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -9,16 +10,29 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<link href="css/estilos.css" rel="stylesheet" type="text/css" />
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
-<title>Insert title here</title>
-</head>
-<body style="font-family: cursive;">
+	<!-- <link href="css/estilos.css" rel="stylesheet" type="text/css" />  -->
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<!-- <a class="navbar-brand" href="#" role="button" aria-haspopup="true"
-			aria-expanded="false"> MEDIFAST </a> -->
-		
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<title>Medifast: Atención rápida y segura</title>
+</head>
+<body style="font-family: serif; background-color: #F7F7F7;">
+	
+	<div class="text-center" style="height: 40px; background-color: #F7F7F7; margin:0px; padding:0px;" >
+		<p class="navbar-text text-center text-muted"><i class="fas fa-phone"></i>
+    	Call-Center: 939 910 911
+  		</p>
+	</div>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+		<a
+			style="font-family: fantasy; font-size: xx-large; padding: 0px; margin: 0px; color: green;"
+			class="navbar-brand "  data-toggle="dropdown" href="#"> <i style="color: red;" class="fas fa-plus"></i>
+			MEDIFAST
+		</a>
+		<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin: 0 20px;">
+			<a class="dropdown-item" href="Controlador?menu=${products}&accion=Listar">${products}</a>
+			<a class="dropdown-item" href="Controlador?menu=home&accion=${sales}">${sales}</a>
+		</div>
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -29,14 +43,6 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> MEDI FAST</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="Controlador?menu=${products}&accion=Listar">${products}</a>
-						<a class="dropdown-item" href="Controlador?menu=home&accion=${sales}">${sales}</a>
-					</div>
-				</li>
 				<li class="nav-item active"><a class="nav-link"
 					href="Controlador?menu=home&accion=Listar"><i
 						class="fas fa-home"></i>Home <span class="sr-only">(current)</span></a>
@@ -44,58 +50,91 @@
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><i class="fas fa-plus-circle"></i> Categorias </a>
+					aria-expanded="false"><i class="fas fa-plus-circle"></i>
+						Categorias </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<c:forEach var="c" items="${categorias}">
-							<a class="dropdown-item" href="Controlador?menu=home&accion=Categoria&id=${c.getId() }">${c.getNombre() }</a>
+							<a class="dropdown-item"
+								href="Controlador?menu=home&accion=Categoria&id=${c.getId() }">${c.getNombre() }</a>
 						</c:forEach>
-					</div>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#"><i class="fas fa-plus-circle"></i>Ofertas del Dia</a>
-				</li>
+					</div></li>
+				<li class="nav-item"><a class="nav-link" href="#"><i
+						class="fas fa-plus-circle"></i>Ofertas del Dia</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="Controlador?menu=home&accion=Carrito"><i class="fas fa-cart-plus">(<label style="color: orange;">${contador}</label>)
-					</i>Carrito</a>
-				</li>
+					href="Controlador?menu=home&accion=Carrito"><i
+						class="fas fa-cart-plus">(<label style="color: red;">${contador}</label>)
+					</i>Carrito</a></li>
 			</ul>
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<form class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" id="txtBuscar">
-					<button style="color: white;"
-						class="btn btn-outline-info my-2 my-sm-0" id="btnBuscar">
+				<form class="form-inline my-2 my-lg-0"
+					action="Controlador?menu=home" method="post">
+					<input class="form-control mr-sm-2" type="text" name="txtBuscar">
+					<button class="btn btn-success my-2 my-sm-0" type="submit"
+						name="accion" value="Buscar">
 						<i class="fas fa-search"></i> Buscar
 					</button>
 				</form>
 			</ul>
 			<ul class="navbar-nav btn-group my-2 my-lg-0" role="group">
-				<a class="btn btn-outline-info" style="color: white;"
-					data-toggle="modal" data-target="#login"> <i
-					class="fas fa-user-tie"></i> ${nombre_cliente}
-				</a>
+				<li class="nav-item">
+					<a style="cursor: pointer;" class="dropdown-toggle text-muted nav-link"
+						data-toggle="dropdown"> <i class="fas fa-user-tie"></i>
+						${cliente.getNombre()}
+					</a>
+					<div class="dropdown-menu text-center dropdown-menu-right">
+						<a class="dropdown-item" href="#" data-toggle="modal"
+							data-target="#myModal">${cliente.getCorreo()}</a>
+						<a class="dropdown-item"
+							href="Controlador?menu=home&accion=Compras">Mis Compras</a>
+						<a class="dropdown-item" href="./Controlador?menu=Salir"> <i
+							class="fas fa-arrow-right"> Salir</i></a>
+					</div>
+				</li>
 			</ul>
 		</div>
 	</nav>
 
+	<div id="carouselExampleControls" class="carousel slide"
+		data-ride="carousel">
+		<div class="carousel-inner">
+			<div class="carousel-item">
+				<img src="img/panel3.jpg" class="d-block w-100" alt="..." height="350">
+			</div>
+			<div class="carousel-item active">
+				<img src="img/panel.jpg" class="d-block w-100" alt="..."  height="350">
+			</div>
+			<div class="carousel-item">
+				<img src="img/panel2.jpg" class="d-block w-100" alt="..." height="350">
+			</div>
+		</div>
+		<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"> <span
+			class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+			class="sr-only">Previous</span>
+		</a> <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"> <span
+			class="carousel-control-next-icon" aria-hidden="true"></span> <span
+			class="sr-only">Next</span>
+		</a>
+	</div>
+
 
 	<div class="container mt-4">
-		<h2>${nom_categoria }</h2>
+		<h4>${nom_categoria }</h4>
 		<div class="row">
 			<c:forEach var="p" items="${productos}">
-				<div class="col-sm-4">
-					<div class="card mt-2">
+				<div class="col-sm-3">
+					<div class="card mt-2" style="border: none;">
 						<img class="mt-2" style="display: block; margin: auto;"
-							src="${p.getFoto()}" width="250" height="250">
+							src="${p.getFoto()}" width="200" height="200">
 						<div class="card-body">
-							<h5 class="card-title">${p.getNombre()}</h5>
+							<!-- <h5 class="card-title">${p.getNombre()}</h5> -->
 							<p class="h5">S/${p.getPrecio() }0</p>
-							<p class="card-text">${p.getDescripcion()}</p>
+							<p class="card-text text-muted">${p.getDescripcion()}</p>
 							<div class="text-center">
 								<a
 									href="Controlador?menu=home&accion=AgregarCarrito&id=${p.getId()}"
-									class="btn btn-outline-info">Agregar a carrito</a> <a
+									class="btn btn-outline-info btn-block btn-sm"><i class="fas fa-cart-plus"></i>Agregar al carrito</a> <a
 									href="Controlador?menu=home&accion=Comprar&id=${p.getId()}"
-									class="btn btn-danger">Comprar ahora</a>
+									class="btn btn-success btn-block btn-sm">Comprar ahora</a>
 							</div>
 						</div>
 					</div>
@@ -106,37 +145,44 @@
 
 	<!-- -MODAL DE LOGGIN -->
 
-	<div class="modal fade" id="login" tabindex="-1" role="dialog"
+	<div class="modal fade" id="compras" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-sm">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content">
 				<div class="modal-body">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<form class="form-sign" action="Controlador" method="POST">
-						<div class="form-group text-center">
-							<img src="img/img.png" height="80" width="80" />
+					<div class="container mt-4">
+						<h2>Mis Compras</h2>
+						<div class="col-sm-12 col-md-12 col-xl-12" style="text-align:center;">
+							 	<table class="table table-striped table-responsive">
+							 		<thead>
+							 			<tr>
+							 				<th>CODIGO DE COMPRA</th>
+							 				<th>FECHA DE COMPRA</th>
+							 				<th>MONTO</th>
+							 				<th>CODIGO DE PAGO</th>
+							 				<th>ESTADO</th>
+							 				<th></th>
+							 			</tr>
+							 		</thead>
+							 		<tbody>
+							 			<c:forEach var="com" items="${compras}">
+							 			<tr>
+							 				<td>C00${com.getId()}</td>
+							 				<td>${com.getFecha()}</td>
+							 				<td>S/${com.getMonto()}0</td>
+							 				<td>P00${com.getIdpago()}</td>
+			 							<td>${com.getEstado()}</td>
+			 							<td><a href="Controlador?menu=home&accion=Detalle&id=${com.getId()}">ver detalle</a></td>
+			 						</tr>
+			 						</c:forEach>
+			 					</tbody>
+						 	</table>
 						</div>
-						<div class="form-group">
-							<label>Email:</label> <input type="email" name="txtCorreo"
-								class="form-control">
-						</div>
-						<div class="form-group">
-							<label>Password:</label> <input type="password" name="txtPass"
-								class="form-control">
-						</div>
-						<div class="form-group">
-							<input type="submit" name="menu" value="Login"
-								class="btn btn-outline-dark btn-block">
-						</div>
-						<div class="form-group">
-							<a class="btn btn-outline-dark btn-block " href="#"
-								data-toggle="modal" data-target="#modalRegistrar">
-								Registrese aquí </a>
-						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -10,12 +10,24 @@
 	<title>Insert title here</title>
 	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
-<body style="font-family: cursive;">
+<body style="font-family: serif; background-color: #F7F7F7;">
+	
+	<div class="text-center" style="height: 40px; background-color: #F7F7F7; margin:0px; padding:0px;" >
+		<p class="navbar-text text-center text-muted" style="align-items: center; font-family: serif;"><i class="fas fa-phone"></i>
+    	Call-Center: 939 910 911
+  		</p>
+	</div>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<!-- <a class="navbar-brand" href="#" role="button" aria-haspopup="true"
-			aria-expanded="false"> MEDIFAST </a> -->
-		
+	<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+		<a
+			style="font-family: fantasy; font-size: xx-large; padding: 0px; margin: 0px; color: green;"
+			class="navbar-brand "  data-toggle="dropdown" href="#"> <i style="color: red;" class="fas fa-plus"></i>
+			MEDIFAST
+		</a>
+		<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin: 0 20px;">
+			<a class="dropdown-item" href="Controlador?menu=${products}&accion=Listar">${products}s</a>
+			<a class="dropdown-item" href="Controlador?menu=home&accion=${sales}">${sales}</a>
+		</div>
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -26,14 +38,6 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Medifast </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="Controlador?menu=${products}&accion=Listar">${products}</a>
-						<a class="dropdown-item" href="Controlador?menu=home&accion=${sales}">${sales}</a>
-					</div>
-				</li>
 				<li class="nav-item active"><a class="nav-link"
 					href="Controlador?menu=home&accion=Listar"><i
 						class="fas fa-home"></i>Home <span class="sr-only">(current)</span></a>
@@ -41,42 +45,53 @@
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><i class="fas fa-plus-circle"></i> Categorias </a>
+					aria-expanded="false"><i class="fas fa-plus-circle"></i>
+						Categorias </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<c:forEach var="c" items="${categorias}">
-							<a class="dropdown-item" href="Controlador?menu=home&accion=Categoria&id=${c.getId() }">${c.getNombre() }</a>
+							<a class="dropdown-item"
+								href="Controlador?menu=home&accion=Categoria&id=${c.getId() }">${c.getNombre() }</a>
 						</c:forEach>
-					</div>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#"><i class="fas fa-plus-circle"></i>Ofertas del Dia</a>
-				</li>
+					</div></li>
+				<li class="nav-item"><a class="nav-link" href="#"><i
+						class="fas fa-plus-circle"></i>Ofertas del Dia</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="Controlador?menu=home&accion=Carrito"><i class="fas fa-cart-plus">(<label style="color: orange;">${contador}</label>)
-					</i>Carrito</a>
-				</li>
+					href="Controlador?menu=home&accion=Carrito"><i
+						class="fas fa-cart-plus">(<label style="color: red;">${contador}</label>)
+					</i>Carrito</a></li>
 			</ul>
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<form class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" id="txtBuscar">
-					<button style="color: white;"
-						class="btn btn-outline-info my-2 my-sm-0" id="btnBuscar">
+				<form class="form-inline my-2 my-lg-0"
+					action="Controlador?menu=home" method="post">
+					<input class="form-control mr-sm-2" type="text" name="txtBuscar">
+					<button class="btn btn-success my-2 my-sm-0" type="submit"
+						name="accion" value="Buscar">
 						<i class="fas fa-search"></i> Buscar
 					</button>
 				</form>
 			</ul>
 			<ul class="navbar-nav btn-group my-2 my-lg-0" role="group">
-				<a class="btn btn-outline-info" style="color: white;"
-					data-toggle="modal" data-target="#login"> <i
-					class="fas fa-user-tie"></i> ${nombre_cliente }
+				<a style="cursor: pointer;" class="dropdown-toggle text-muted"
+					data-toggle="dropdown"> <i class="fas fa-user-tie"></i>
+					${cliente.getNombre()}
 				</a>
+				<div class="dropdown-menu text-center dropdown-menu-right">
+					<a class="dropdown-item" href="#" data-toggle="modal"
+						data-target="#myModal">${cliente.getCorreo()}</a>
+					<a class="dropdown-item"
+						href="Controlador?menu=home&accion=Compras">Mis Compras</a>
+					<a class="dropdown-item" href="./Controlador?menu=Salir"> <i
+						class="fas fa-arrow-right"> Salir</i></a>
+				</div>
 			</ul>
 		</div>
 	</nav>
-	<div style="padding: 0 150px; padding-top:15px;">
+	
+	
+	<div class="container col-sm-10 mt-4">
 		<h2>Nuestras Ventas</h2>
-		<div class="col-sm-12 col-md-12 col-xl-12 text-center" >
-			 	<table  class="table  table-striped">
+		<div class=" card col-sm-12 table-responsive text-center" >
+			 	<table  class="table  table-striped ">
 			 		<thead class="">
 			 			<tr>
 			 				<th>COD. VENTA</th>

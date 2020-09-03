@@ -10,23 +10,31 @@
 	<title>Insert title here</title>
 	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
-<body style="font-family: cursive;">
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  		
+<body style="font-family: serif; background-color: #F7F7F7;">
+	
+	<div class="text-center" style="height: 40px; background-color: #F7F7F7; margin:0px; padding:0px;" >
+		<p class="navbar-text text-center text-muted" style="align-items: center; font-family: serif;"><i class="fas fa-phone"></i>
+    	Call-Center: 939 910 911
+  		</p>
+	</div>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+		<a
+			style="font-family: fantasy; font-size: xx-large; padding: 0px; margin: 0px; color: green;"
+			class="navbar-brand "  data-toggle="dropdown" href="#"> <i style="color: red;" class="fas fa-plus"></i>
+			MEDIFAST
+		</a>
+		<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin: 0 20px;">
+			<a class="dropdown-item" href="Controlador?menu=${products}&accion=Listar">${products}s</a>
+			<a class="dropdown-item" href="Controlador?menu=home&accion=${sales}">${sales}</a>
+		</div>
+		
   		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
    		<span class="navbar-toggler-icon"></span>
   		</button>
 
   		<div class="collapse navbar-collapse" id="navbarSupportedContent">
     		<ul class="navbar-nav mr-auto">
-    			<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Medifast </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="Controlador?menu=${products}&accion=Listar">${products}</a>
-						<a class="dropdown-item" href="Controlador?menu=home&accion=${sales}">${sales}</a>
-					</div>
-				</li>
       			<li class="nav-item active">
        				<a class="nav-link" href="Controlador?menu=home&accion=Listar"><i class="fas fa-home"></i>Home <span class="sr-only">(current)</span></a>
       			</li>
@@ -48,7 +56,18 @@
       			</li>
     		</ul>
     		<ul class="navbar-nav btn-group my-2 my-lg-0" role="group">
-				<a class="btn btn-outline-info" style="color: white;" data-toggle="modal" data-target="#login"> <i class="fas fa-user-tie"></i> ${nombre_cliente }</a>
+				<a style="cursor: pointer;" class="dropdown-toggle text-muted"
+					data-toggle="dropdown"> <i class="fas fa-user-tie"></i>
+					${cliente.getNombre()}
+				</a>
+				<div class="dropdown-menu text-center dropdown-menu-right">
+					<a class="dropdown-item" href="#" data-toggle="modal"
+						data-target="#myModal">${cliente.getCorreo()}</a>
+					<a class="dropdown-item"
+						href="Controlador?menu=home&accion=Compras">Mis Compras</a>
+					<a class="dropdown-item" href="./Controlador?menu=Salir"> <i
+						class="fas fa-arrow-right"> Salir</i></a>
+				</div>
 			</ul>
   		</div>
 	</nav>
@@ -56,22 +75,21 @@
 		<h3><i class="fas fa-cart-plus"></i>Carrito</h3><br>
 		<div class="row">
 			<div class="col-sm-8">
-			 	<table class="table table-hover ">
+			 	<table class="table table-hover table-responsive">
 			 		<thead>
 			 			<tr>
 			 				<th>ITEM</th>
-			 				<th>NOMBRES</th>
-			 				<th>DESCRIPCION</th>
+			 				<th>NOMBRE</th>
+			 				<th>DESCRIPCIÓN</th>
 			 				<th>PRECIO</th>
 			 				<th>CANTIDAD</th>
 			 				<th>SUBTOTAL</th>
-			 				<th>ACCION</th>
 			 			</tr>
 			 		</thead>
 			 		<tbody>
 			 			<c:forEach var="car" items="${carrito}" varStatus="iterator">
 			 			<tr>
-			 				<td>00${iterator.index+1}</td>
+			 				<td>${iterator.index+1}</td>
 			 				<td>${car.getNombres()}</td>
 			 				<td style="font-size: x-small;">${car.getDescripcion()}
 			 					<img src="${car.getImagen() }" width="100" height="80">
@@ -84,7 +102,7 @@
 			 				<td>S/${car.getSubTotal()}0</td>
 			 				<td style="text-align:center;">
 			 					<input type="hidden" id="idp" value="${car.getIdProducto()}">
-			 					<a class="btn btn-outline-dark" href="#" id="btnDelete"><img src="https://img.icons8.com/ios-filled/50/000000/delete.png" width="20" height="20"/></a>
+			 					<a style="color: red;" href="#" id="btnDelete"><i class="fas fa-trash-alt"></i></a>
 			 				</td>
 			 			</tr>
 			 			</c:forEach>
@@ -92,7 +110,7 @@
 			 	</table>
 			</div>
 			<div class="col-sm-4">
-				<div class="card">
+				<div class="card sticky-top" style="top: 150px;">
 					<div class="card-header">
 						<h3>Generar Compra</h3>
 					</div>
@@ -101,7 +119,7 @@
 						<input type="text" value="S/${totalPagar}0" readonly="" class="form-control">
 						<label>Descuento:</label>
 						<input type="text" value="S/0.00" readonly="" class="form-control">
-						<label>Total Pagar:</label>
+						<label>Total a Pagar:</label>
 						<input type="text" value="S/${totalPagar}0" readonly="" class="form-control">
 					</div>
 					<div class="card-footer">
@@ -123,7 +141,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<form class="form-sign" action="Controlador?menu=home"
+					<form class="form-sign" action="Controlador"
 						method="POST">
 						<div class="form-group text-center">
 							<img src="img/img.png" height="80" width="80" />
@@ -137,7 +155,7 @@
 								class="form-control">
 						</div>
 						<div class="form-group">
-							<input type="submit" name="accion" value="Login"
+							<input type="submit" name="menu" value="Login"
 								class="btn btn-outline-dark btn-block">
 						</div>
 						<div class="form-group">

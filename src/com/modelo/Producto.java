@@ -9,6 +9,8 @@ public class Producto {
 	String descripcion;
 	double precio;
 	int stock;
+	int id_categoria;
+	
 	public Producto() {
 		super();
 	}
@@ -20,6 +22,14 @@ public class Producto {
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.stock = stock;
+	}
+	
+	
+	public int getId_categoria() {
+		return id_categoria;
+	}
+	public void setId_categoria(int id_categoria) {
+		this.id_categoria = id_categoria;
 	}
 	public int getId() {
 		return id;
