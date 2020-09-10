@@ -18,6 +18,7 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.config.Fecha;
 import com.config.FechaHora;
 import com.modelo.Carrito;
 import com.modelo.Categoria;
@@ -68,7 +69,7 @@ public class Controlador extends HttpServlet {
 	List<Carrito> listaCarrito=new ArrayList<>();
 
 	int id_pago;
-    double totalPagar=0.0;
+    double totalPagar=0;
     int cantidad=1;
     int idp;
     Carrito car;
@@ -93,44 +94,6 @@ public class Controlador extends HttpServlet {
     	String menu=request.getParameter("menu");
 		String accion=request.getParameter("accion");
 		productos=pdao.listar();
-		
-		if(menu.equals("ActualizarProducto")) {
-			switch (accion) {
-				case "Listar":
-					productos=pdao.listar();
-					request.setAttribute("productos", productos);
-					break;
-				case "Actualizar":
-					ArrayList<String> lista1 = new ArrayList<>();
-	                try {
-	                    FileItemFactory file = new DiskFileItemFactory();
-	                    ServletFileUpload fileUpload = new ServletFileUpload(file);
-	                    List<FileItem> items = fileUpload.parseRequest(request);
-	                    for (int i = 0; i < items.size(); i++) {
-	                        FileItem fileItem = (FileItem) items.get(i);
-	                        if (!fileItem.isFormField()) {
-	                            File f = new File("C:\\xampp\\htdocs\\img\\" + fileItem.getName());
-	                            fileItem.write(f);
-	                            p.setFoto("http://localhost/img/"+fileItem.getName());
-	                        } else {
-	                            lista1.add(fileItem.getString());
-	                        }
-	                    }
-	                    p.setNombre(lista1.get(0));
-	                    p.setDescripcion(lista1.get(1));
-	                    p.setPrecio(Double.parseDouble(lista1.get(2)));
-	                    p.setStock(Integer.parseInt(lista1.get(3)));
-	                    p.setId(idp);
-	                    pdao.actualizar(p);
-	                } catch (Exception e) {
-	                } 
-					request.getRequestDispatcher("Controlador?menu=Producto&accion=Listar").forward(request, response);
-					break;
-				default:
-					break;
-				}
-			request.getRequestDispatcher("actualizarProducto.jsp").include(request, response);
-		}
 		
 		HttpSession session = request.getSession();
 		
@@ -172,6 +135,7 @@ public class Controlador extends HttpServlet {
 				request.setAttribute("sales", sales);
 				request.setAttribute("products", products);
 				request.setAttribute("cliente", cliente);
+				request.setAttribute("categorias", categorias);
 				switch(accion) {
 					case "Buscar":
 						String texto = request.getParameter("txtBuscar");
@@ -190,10 +154,6 @@ public class Controlador extends HttpServlet {
 						pdao.agregarCategoria(categoria);
 						request.getRequestDispatcher("Controlador?menu=Producto&accion=Listar").forward(request, response);
 					break;
-					/*case "Salir":
-						cliente = new Cliente();
-						request.getRequestDispatcher("Controlador?menu=home&accion=Nuevo").forward(request, response);
-					break;*/
 					case "Ventas":
 						ventas=comDao.listar_compras();
 						request.setAttribute("ventas", ventas);
@@ -241,7 +201,7 @@ public class Controlador extends HttpServlet {
 						request.setAttribute("productos", productos);
 						break;
 					case "Comprar":
-						totalPagar=0.0;
+						totalPagar=0;
 						pos=0;
 						cantidad=1;
 						idp=Integer.parseInt(request.getParameter("id"));
@@ -358,11 +318,18 @@ public class Controlador extends HttpServlet {
 						//request.getRequestDispatcher("Controlador?menu=home&accion=Carrito").forward(request, response);
 						break;
 					case "Carrito":
-						totalPagar=0.0;
+						String fecha= Fecha.fechaBD();
+						totalPagar=0;
+						double igv=0.0, total=0;
 						
 						for(int i=0;i<listaCarrito.size();i++) {
 							totalPagar+=listaCarrito.get(i).getSubTotal();
 						}
+						igv=totalPagar*18/100;
+						total= totalPagar + igv;
+						request.setAttribute("fecha", fecha);
+						request.setAttribute("total", total);
+						request.setAttribute("igv", igv);
 						request.setAttribute("carrito", listaCarrito);
 						request.setAttribute("totalPagar", totalPagar);
 						request.setAttribute("categorias", categorias);
@@ -373,10 +340,10 @@ public class Controlador extends HttpServlet {
 						request.getRequestDispatcher("Controlador?menu=home&accion=Listar").forward(request, response);
 						break;
 					case "Pagar":
-						String tarjeta= request.getParameter("txtTarjeta");
-						String codigo=request.getParameter("txtCodigo");
-						pago.setTarjeta(tarjeta);
-						pago.setCod_seguridad(codigo);
+						//String tarjeta= request.getParameter("txtTarjeta");
+						//String codigo=request.getParameter("txtCodigo");
+						//pago.setTarjeta(tarjeta);
+						//pago.setCod_seguridad(codigo);
 						pago.setMonto(totalPagar);
 						pagodao.agregar(pago);
 						pago1=pagodao.listarXtarjeta(pago.getTarjeta());
@@ -398,6 +365,15 @@ public class Controlador extends HttpServlet {
 						request.getRequestDispatcher("Controlador?menu=home&accion=Listar").forward(request, response);
 						break;
 					case "GenerarCompra":
+						String tarjeta= request.getParameter("txtTarjeta");
+						String codigo=request.getParameter("txtCodigo");
+						pago.setTarjeta(tarjeta);
+						pago.setCod_seguridad(codigo);
+						pago.setMonto(totalPagar);
+						pagodao.agregar(pago);
+						//pago1=pagodao.listarXtarjeta(tarjeta);
+						pago1=pagodao.listarPorCodigo(codigo);
+						
 						for (int i = 0; i < listaCarrito.size(); i++) {
 							Producto pr=new Producto();
 							int cantidad=listaCarrito.get(i).getCantidad();
@@ -407,9 +383,10 @@ public class Controlador extends HttpServlet {
 							int sac=pr.getStock()-cantidad;
 							prdao.actualizarstock(idproduct, sac);
 						}
+						System.out.println(pago1.getId());
 						System.out.println(cliente.getDireccion());
 						CompraDao dao=new CompraDao();
-						Compra compra=new Compra(cliente.getId(),pago1.getId(), FechaHora.fechaHoraBD(), totalPagar, "Cancelado", cliente.getDireccion() , listaCarrito);
+						Compra compra=new Compra(cliente.getId(),pago1.getId() , FechaHora.fechaHoraBD(), totalPagar, "Cancelado", cliente.getDireccion() , listaCarrito);
 						//Compra compra=new Compra(cliente.getId(),pago1.getId(), FechaHora.fechaHoraBD(), totalPagar, "Cancelado", listaCarrito);
 						int res=dao.GenerarCompra(compra);
 						if (res!=0&&totalPagar>0) {
@@ -496,8 +473,8 @@ public class Controlador extends HttpServlet {
 		                
 						request.getRequestDispatcher("Controlador?menu=Producto&accion=Listar").forward(request, response);
 						break;
-					case "Eliminar":
-						idp=Integer.parseInt(request.getParameter("id"));
+					case "Delete":
+						idp=Integer.parseInt(request.getParameter("idp"));
 						pdao.eliminar(idp);
 						request.getRequestDispatcher("Controlador?menu=Producto&accion=Listar").forward(request, response);
 						break;
@@ -506,6 +483,46 @@ public class Controlador extends HttpServlet {
 				}
 				request.getRequestDispatcher("producto.jsp").include(request, response);
 			}
+			
+			if(menu.equals("ActualizarProducto")) {
+				switch (accion) {
+					case "Listar":
+						productos=pdao.listar();
+						request.setAttribute("productos", productos);
+						break;
+					case "Actualizar":
+						ArrayList<String> lista1 = new ArrayList<>();
+		                try {
+		                    FileItemFactory file = new DiskFileItemFactory();
+		                    ServletFileUpload fileUpload = new ServletFileUpload(file);
+		                    List<FileItem> items = fileUpload.parseRequest(request);
+		                    for (int i = 0; i < items.size(); i++) {
+		                        FileItem fileItem = (FileItem) items.get(i);
+		                        if (!fileItem.isFormField()) {
+		                            File f = new File("C:\\xampp\\htdocs\\img\\" + fileItem.getName());
+		                            fileItem.write(f);
+		                            p.setFoto("http://localhost/img/"+fileItem.getName());
+		                        } else {
+		                            lista1.add(fileItem.getString());
+		                        }
+		                    }
+		                    p.setNombre(lista1.get(0));
+		                    p.setDescripcion(lista1.get(1));
+		                    p.setPrecio(Double.parseDouble(lista1.get(2)));
+		                    p.setStock(Integer.parseInt(lista1.get(3)));
+		                    p.setId_categoria(Integer.parseInt(lista1.get(4)));
+		                    p.setId(idp);
+		                    pdao.actualizar(p);
+		                } catch (Exception e) {
+		                } 
+						request.getRequestDispatcher("Controlador?menu=Producto&accion=Listar").forward(request, response);
+						break;
+					default:
+						break;
+					}
+				request.getRequestDispatcher("actualizarProducto.jsp").include(request, response);
+			}
+			
 			
 		}else {
 			request.getRequestDispatcher("login.jsp").forward(request, response);

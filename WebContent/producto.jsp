@@ -5,10 +5,10 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<link href="css/estilos.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">	
 	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
-	<title>Insert title here</title>
+	<link rel="icon" href="img/descarga.ico"/>
+	<title>Medifast: Atención rápida y segura</title>
 </head>
 <body style="font-family: serif; background-color: #F7F7F7;">
 	
@@ -96,7 +96,7 @@
 				<a href="#" class="btn btn-info" data-toggle="modal" data-target="#categoria">Agregar Categoria</a>
 			</div>
 			<div class="card-body text-center">
-				<table class="table table-striped table-responsive">
+				<table class="table table-striped table-responsive" id="myTable">
 				<thead>
 					<tr>
 						<th>CODIGO</th>
@@ -119,7 +119,8 @@
 						<td>${pro.getStock()}</td>	
 						<td>
 							<a class="btn btn-warning" href="Controlador?menu=Producto&accion=Editar&id=${pro.getId()}" >Editar</a>
-							<a class="btn btn-danger" href="Controlador?menu=Producto&accion=Eliminar&id=${pro.getId()}">Delete</a>
+							<input type="hidden" id="idp" value="${pro.getId()}">
+							<a class="btn btn-danger" href="#" id="btnDeleteProducto">Delete</a>
 						</td>
 					</tr>
 					</c:forEach>
@@ -128,6 +129,7 @@
 			</div>
 		</div>
 	</div>
+
 		<!-- MODAL AGREGAR PRODUCTO -->
 		
 	<div  class="modal fade" id="agregarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -176,12 +178,14 @@
 							</select>
 							</div>
 						</div>
-						<div class="form-group">
-							<label>Imagen del Producto:</label>
-							<input type="file"  name="fileImagen" >
-						</div>
+						<div class="form-group row">
+								<label class="col-sm-2">Imagen:</label>
+								<div class="col-sm-10 ml-auto">
+									<input type="file"  name="fileImagen" >
+								</div>
+							</div>
 						<div class="text-center">
-							<input type="submit" name="accion" value="Agregar Producto" class="btn btn-info">
+							<input type="submit" name="accion" value="Agregar Producto" id="btnAgregar" class="btn btn-info">
 						</div>
 					</form>
 	      		</div>
@@ -190,47 +194,7 @@
 	</div>
 		
 		<!-- MODAL ACTUALIZAR PRODUCTO -->
-	
-	<div  class="modal fade" id="actualizarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  		<div class="modal-dialog">
-    		<div class="modal-content">
-      			<div class="modal-header">
-        			<h3 class="modal-title" id="exampleModalLabel">Actualice su producto</h3>
-	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          		<span aria-hidden="true">&times;</span>
-	        		</button>
-	      		</div>
-	      		<div class="modal-body">
-	        		<form action="Controlador?menu=ActualizarProducto&accion=Actualizar" method="POST" enctype="multipart/form-data">
-					<div class="form-group">
-						<label>Nombres:</label>
-						<input type="text" value="${producto.getNombre() }" name="txtNombre" class="form-control">
-					</div>
-					<div class="form-group">
-						<label>Descripción:</label>
-						<input type="text" value="${producto.getDescripcion() }" name="txtDescripcion" class="form-control">
-					</div>
-					<div class="form-group">
-						<label>Precio:</label>
-						<input type="text" value="$.${producto.getPrecio() }0" name="txtPrecio" class="form-control">
-					</div>
-					<div class="form-group">
-						<label>Stock:</label>
-						<input type="text" value="${producto.getStock() }" name="txtStock" class="form-control">
-					</div>
-					<div class="form-group">
-						<label>Imagen del Producto:</label>
-						<input type="file"  name="fileImagen" >
-					</div>
-					<div>
-						<input type="submit" name="accion" value="Actualizar Producto" class="btn btn-success">
-					</div>
-					
-				</form>
-	      		</div>
-	    	</div>
-	  	</div>
-	</div>
+
 	
 		<!--  -->
 	
@@ -283,8 +247,12 @@
 	  	</div>
 	</div>
 	
+	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="js/funciones.js" type="text/javascript"></script>
 </body>
 </html>

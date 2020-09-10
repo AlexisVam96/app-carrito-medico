@@ -143,7 +143,7 @@ public class CompraDao {
 				r=ps.executeUpdate();
 			}
 		} catch (Exception e) {
-			System.out.println("eror en la base de datos" +e.getMessage());
+			System.out.println("eror al insertar la compra en la bd: " +e.getMessage());
 		}
 		return r;
 	}

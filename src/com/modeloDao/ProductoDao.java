@@ -44,7 +44,7 @@ public class ProductoDao {
 	}
 	
 	public void actualizar(Producto p) {
-		String sql="update producto set Nombres=?, Foto=?, Descripcion=?, Precio=?, Stock=? where idProducto=?";
+		String sql="update producto set Nombres=?, Foto=?, Descripcion=?, Precio=?, Stock=? , idCategoria=? where idProducto=?";
 
 		try {
 			con=cn.getConnection();
@@ -54,7 +54,8 @@ public class ProductoDao {
 			ps.setString(3, p.getDescripcion());
 			ps.setDouble(4, p.getPrecio());
 			ps.setInt(5, p.getStock());
-			ps.setInt(6, p.getId());
+			ps.setInt(6, p.getId_categoria());
+			ps.setInt(7, p.getId());
 			ps.executeUpdate();
 			
 		} catch (Exception e) {

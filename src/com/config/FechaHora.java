@@ -11,7 +11,7 @@ public class FechaHora {
 		
 	}
 	public static String fechaHoraBD() {
-		DateTimeFormatter dtf= DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss");
+		DateTimeFormatter dtf= DateTimeFormatter.ofPattern("dd MMMM YYYY - hh:mm a");
 		fechaHora = dtf.format(localDate);
 		return fechaHora;
 	}

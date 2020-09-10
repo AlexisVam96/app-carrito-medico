@@ -6,7 +6,7 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<link href="css/estilos.css" rel="stylesheet" type="text/css"/>
+	
 	<title>Insert title here</title>
 	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
@@ -72,64 +72,66 @@
   		</div>
 	</nav>
 	
-	<div class="d-flex">
-		<div class="card col-sm-4">
-			<div class="card-body">
-				<form action="Controlador?menu=ActualizarProducto&accion=Actualizar" method="POST" enctype="multipart/form-data">
-					<h2>Actualizar Producto</h2>
-					<div class="form-group">
-						<label>Nombres:</label>
-						<input type="text" value="${producto.getNombre() }" name="txtNombre" class="form-control">
+	<div class="container">
+		<div class="card-body">
+				<h2>Actualizar Producto</h2>
+				<div class="row">
+					<div class="col-sm-6 mt-4 ml-auto">	
+						<img alt="" src="${producto.getFoto() }" width="400" height="400">		
+						
 					</div>
-					<div class="form-group">
-						<label>Descripción:</label>
-						<input type="text" value="${producto.getDescripcion() }" name="txtDescripcion" class="form-control">
+					<div class="col-sm-6 mt-4">
+						<form action="Controlador?menu=ActualizarProducto&accion=Actualizar" method="POST" enctype="multipart/form-data">		
+							<div class="form-group row">
+							<label class="col-sm-2">Nombre:</label>
+								<div class="col-sm-10">
+									<input type="text" name="txtNombre" value="${producto.getNombre() }" class="form-control">
+								</div>
+							</div>
+							<div class="form-group row">
+							<label class="col-sm-2">Descripción:</label>
+								<div class="col-sm-10">
+									<input type="text" name="txtNombre" value="${producto.getDescripcion() }" class="form-control">
+								</div>
+							</div>
+							<div class="form-group row">
+							<label class="col-sm-2">Precio:</label>
+								<div class="col-sm-10">
+									<input type="text"  name="txtPrecio" value="${producto.getPrecio() }" class="form-control">
+								</div>
+							</div>
+							<div class="form-group row">
+							<label class="col-sm-2">Stock:</label>
+								<div class="col-sm-10">
+									<input type="text"  name="txtStock" value="${producto.getStock() }" class="form-control">
+								</div>
+							</div>
+							<div class="form-group row">
+							<label class="col-sm-2">Categoría:</label>
+							<div class="col-sm-10">
+								<select name="txtCategoria" class="form-control">
+									<option value="default" selected>--Agregue su categoria--</option>
+									<c:forEach var="c" items="${categorias}">
+										<option value="${c.getId()}">${c.getNombre() }</option>
+									</c:forEach>
+								</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-2">Imagen:</label>
+								<div class="col-sm-10 ml-auto">
+									<input type="file"  name="fileImagen" >
+								</div>
+							</div>
+							<div>
+								<input type="submit" name="accion" value="Actualizar Producto" class="btn btn-success">
+								<a href="Controlador?menu=Producto&accion=Listar" class="btn btn-secondary">regresar</a>
+							</div>
+						</form>
 					</div>
-					<div class="form-group">
-						<label>Precio:</label>
-						<input type="text" value="${producto.getPrecio()}" name="txtPrecio" class="form-control">
-					</div>
-					<div class="form-group">
-						<label>Stock:</label>
-						<input type="text" value="${producto.getStock()}" name="txtStock" class="form-control">
-					</div>
-					<div class="form-group">
-						<label>Imagen del Producto:</label>
-						<input type="file"  name="fileImagen" >
-					</div>
-					<div>
-						<input type="submit" name="accion" value="Actualizar Producto" class="btn btn-success">
-					</div>
-					
-				</form>
+				</div>
 			</div>
-		</div>
-		<div class="col-sm-8" style="text-align:center;">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>NOMBRE</th>
-						<th>IMAGEN</th>
-						<th>DESCRIPCIÓN</th>
-						<th>PRECIO</th>
-						<th>STOCK</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="pro" items="${productos}">	
-					<tr>
-						<td>${pro.getId()}</td>
-						<td>${pro.getNombre()}</td>
-						<td><img src="${pro.getFoto()}" width="80" height="80"></td>
-						<td>${pro.getDescripcion()}</td>	
-						<td>$.${pro.getPrecio()}0</td>	
-						<td>${pro.getStock()}</td>	
-					</tr>
-					</c:forEach>
-				</tbody>
-			</table>		
-		</div>
+		
 	</div>
 	
 	

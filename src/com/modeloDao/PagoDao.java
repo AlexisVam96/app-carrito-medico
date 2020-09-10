@@ -50,6 +50,27 @@ public class PagoDao {
 		return p;
 	}
 	
+	public Pago listarPorCodigo(String codigo) {
+		String sql="select * from pago where Codigo="+codigo;
+		Pago p=new Pago();
+		try {
+			con=cn.getConnection();
+			ps=(PreparedStatement) con.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				p.setId(rs.getInt(1));
+				p.setCod_seguridad(rs.getString(2));
+				p.setMonto(rs.getDouble(3));
+				p.setTarjeta(rs.getString(4));
+			}
+			
+		}catch(Exception e) {
+			
+		}
+		return p;
+	}
+	
+	
 	public int agregar(Pago pago) {
 		String sql="insert into pago(Tarjeta,Codigo,Monto) values (?,?,?)";
 		try {

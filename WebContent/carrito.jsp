@@ -6,26 +6,34 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	
-	<title>Insert title here</title>
 	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<link rel="icon" href="img/descarga.ico"/>
+	<title>Medifast: Atención rápida y segura</title>
+	<style>
+	@media print{
+		.parte01, .parte02, .parte03, .btn, .accion{
+			display: none;
+			
+		}
+	}
+</style>
 </head>
 <body style="font-family: serif; background-color: #F7F7F7;">
 	
-	<div class="text-center" style="height: 40px; background-color: #F7F7F7; margin:0px; padding:0px;" >
+	<div class="text-center parte01" style="height: 40px; background-color: #F7F7F7; margin:0px; padding:0px;" >
 		<p class="navbar-text text-center text-muted" style="align-items: center; font-family: serif;"><i class="fas fa-phone"></i>
     	Call-Center: 939 910 911
   		</p>
 	</div>
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+	<nav class="parte02 navbar navbar-expand-lg navbar-light bg-light sticky-top">
 		<a
 			style="font-family: fantasy; font-size: xx-large; padding: 0px; margin: 0px; color: green;"
 			class="navbar-brand "  data-toggle="dropdown" href="#"> <i style="color: red;" class="fas fa-plus"></i>
 			MEDIFAST
 		</a>
 		<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin: 0 20px;">
-			<a class="dropdown-item" href="Controlador?menu=${products}&accion=Listar">${products}s</a>
+			<a class="dropdown-item" href="Controlador?menu=${products}&accion=Listar">${products}</a>
 			<a class="dropdown-item" href="Controlador?menu=home&accion=${sales}">${sales}</a>
 		</div>
 		
@@ -71,7 +79,7 @@
 			</ul>
   		</div>
 	</nav>
-	<div class="container mt-4">
+	<div class="parte03 container mt-4">
 		<h3><i class="fas fa-cart-plus"></i>Carrito</h3><br>
 		<div class="row">
 			<div class="col-sm-8">
@@ -79,8 +87,8 @@
 			 		<thead>
 			 			<tr>
 			 				<th>ITEM</th>
-			 				<th>NOMBRE</th>
-			 				<th>DESCRIPCIÓN</th>
+			 				<th>PRODUCTO</th>
+			 				<th>IMAGEN</th>
 			 				<th>PRECIO</th>
 			 				<th>CANTIDAD</th>
 			 				<th>SUBTOTAL</th>
@@ -90,8 +98,8 @@
 			 			<c:forEach var="car" items="${carrito}" varStatus="iterator">
 			 			<tr>
 			 				<td>${iterator.index+1}</td>
-			 				<td>${car.getNombres()}</td>
-			 				<td style="font-size: x-small;">${car.getDescripcion()}
+			 				<td>${car.getDescripcion()}</td>
+			 				<td>
 			 					<img src="${car.getImagen() }" width="100" height="80">
 			 				</td>
 			 				<td>S/${car.getPrecioCompra()}0</td>
@@ -123,82 +131,160 @@
 						<input type="text" value="S/${totalPagar}0" readonly="" class="form-control">
 					</div>
 					<div class="card-footer">
-						<a href="Controlador?menu=home&accion=GenerarCompra" class="btn btn-info btn-block">Generar Compra</a>
-						<!-- ACTIVA EL MODAL -->
-						<a href="#" class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModal">Realizar Pago</a>
+						<a href="#" class="btn btn-info btn-block" data-toggle="modal" data-target="#pago">Generar Compra</a>
+						<!-- <a href="Controlador?menu=home&accion=GenerarCompra" class="btn btn-info btn-block">Generar Compra</a> -->
+						<a href="#" class="btn btn-success btn-block" data-toggle="modal" data-target="#factura">Realizar Factura</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<div class="modal fade" id="login" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-sm">
-			<div class="modal-content">
-				<div class="modal-body">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<form class="form-sign" action="Controlador"
-						method="POST">
-						<div class="form-group text-center">
-							<img src="img/img.png" height="80" width="80" />
-						</div>
-						<div class="form-group">
-							<label>Email:</label> <input type="email" name="txtCorreo"
-								class="form-control">
-						</div>
-						<div class="form-group">
-							<label>Password:</label> <input type="password" name="txtPass"
-								class="form-control">
-						</div>
-						<div class="form-group">
-							<input type="submit" name="menu" value="Login"
-								class="btn btn-outline-dark btn-block">
-						</div>
-						<div class="form-group">
-							<a class="btn btn-outline-dark btn-block " href="#"
-								data-toggle="modal" data-target="#modalRegistrar">
-								Registrese aquí </a>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+	<!-- MODAL FACTURA -->
 	
+	<!-- Modal -->
+	<div class="modal fade" id="factura" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content" id="areaImprimir">
+	      <div class="modal-header">
+	        <h4 class="modal-title" id="staticBackdropLabel"><i class="fas fa-file-invoice"></i> Factura Medifast</h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="row">
+			      <div class="col-md-6 ml-auto">
+			      	<div class="row mt-2">
+						<div class="form-group col-md-6">
+							<label >Fecha de Compra:</label>					
+							<input type="text" name="txtNombre" value="${fecha }" readonly="" class="form-control">				
+						</div>
+						<div class="form-group col-md-6">
+							<label >Nro. de Serie:</label>
+							<input type="text" name="txt-Serie" value="17200280" readonly="" class="form-control">
+						</div>
+					</div>					      	      				      	
+			      </div>
+			</div>
+	        <div class="row">
+				<div class="form-group col-sm-3">
+					<label >Cliente:</label>
+					<input type="text" name="txtApellido" value="${cliente.getNombre() }" class="form-control">
+				</div>
+				<div class="form-group col-sm-3">
+					<label >Telefono:</label>					
+					<input type="text" name="txtNombre" value="939910911"  class="form-control">				
+				</div>
+				<div class="form-group col-sm-6">
+					<label >Dirección:</label>
+					<input type="text" name="txtApellido"  value="${cliente.getDireccion() }"  class="form-control">
+				</div>
+	        </div>
+	      </div>
+	      <div class="container">
+		      <table class="table table-hover table-responsive">
+				 	<thead>
+						<tr>
+							<th>ITEM</th>
+							<th>PRODUCTO</th>
+			 				<th>PRECIO</th>
+			 				<th>CANTIDAD</th>
+			 				<th>SUBTOTAL</th>
+			 			</tr>
+			 		</thead>
+			 		<tbody>
+			 			<c:forEach var="car" items="${carrito}" varStatus="iterator">
+			 			<tr>
+			 				<td class="text-center">${iterator.index+1}</td>
+			 				<td>${car.getDescripcion()}</td>
+			 				<td>S/${car.getPrecioCompra()}0</td>
+			 				<td class="text-center">${car.getCantidad() }</td>
+			 				<td>S/${car.getSubTotal()}0</td>
+			 			</tr>
+			 			</c:forEach>
+			 		</tbody>
+			 	</table>
+    			<div class="row">
+			      <div class="col-md-6 ml-auto">
+			      	<div class="row form-group">
+				      	<label class="col-md-4">Sub total:</label>	
+				      	<div class="col-md">
+				      		<input class="form-control" type="text" name="txtTotal" readonly="" value="S/${totalPagar }0">
+				      	</div>		
+			      	</div>					      	      				      	
+			      </div>
+			    </div>
+			    <div class="row">
+			      <div class="col-md-6 ml-auto">
+			      	<div class="row form-group">
+				      	<label class="col-md-4">IGV (18%):</label>	
+				      	<div class="col-md">
+				      		<input class="form-control" type="text" name="txtTotal" readonly="" value="S/${igv }">
+				      	</div>		
+			      	</div>					      	      				      	
+			      </div>
+			    </div>
+			    <div class="row">
+			      <div class="col-md-6 ml-auto">
+			      	<div class="row form-group">
+				      	<label class="col-md-4">Total a Pagar:</label>	
+				      	<div class="col-md">
+				      		<input class="form-control" type="text" name="txtTotal" readonly="" value="S/${total }">
+				      	</div>		
+			      	</div>					      	      				      	
+			      </div>
+			    </div>
+			</div>
+	      <div class="modal-footer">
+	      	<a class="btn btn-secondary" href="Controlador?menu=home&accion=Carrito">Close</a>
+	        <input type="button" class="btn btn-success" onclick="printDiv('areaImprimir')" value="Imprimir" />
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	
 	<!-- MODAL PAGAR PRODUCTO -->
 	
 
-	<div  class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div  class="modal fade" id="pago" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   		<div class="modal-dialog modal-dialog-centered">
     		<div class="modal-content">
       			<div class="modal-header">
-        			<h5 class="modal-title" id="exampleModalLabel">Realizar Pago</h5>
+        			<h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-wallet"></i> Realizar Pago</h5>
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          		<span aria-hidden="true">&times;</span>
 	        		</button>
 	      		</div>
 	      		<div class="modal-body">
-	        		<form action="Controlador?menu=home&accion=Pagar" method="POST" >
-						<div class="form-group">
-							<label>Nombres:</label>
-							<input type="text"  name="txtNombres" value="${cliente.getNombre() }" readonly="" class="form-control">
+	        		<form action="Controlador?menu=home&accion=GenerarCompra" method="POST" >
+						<div class="row">
+							<div class="form-group col-sm-6">
+								<label >NOMBRE:</label>					
+								<input type="text" name="txtNombre"  class="form-control">				
+							</div>
+							<div class="form-group col-sm-6">
+								<label >APELLIDO:</label>
+								<input type="text" name="txtApellido"  class="form-control">
+							</div>
 						</div>
 						<div class="form-group">
-							<label>Tarjeta:</label>
-							<input type="text"  name="txtTarjeta" placeholder="9999-9999-9999-9999" class="form-control">
+							<label>TARJETA:</label>
+							<input type="text"  name="txtTarjeta" placeholder="**** **** **** ****" class="form-control">
     						<span ><img src="img/payment.png" width="250" height="50"></span>
 						</div>
-						<div class="form-group">
-							<label>CSV:</label>
-							<input type="text" name="txtCodigo" placeholder="123" class="form-control">
+						<div class="row">
+							<div class="form-group col-sm-6">
+								<label >CSV:</label>					
+								<input type="text" name="txtCodigo" placeholder="000" class="form-control">				
+							</div>
+							<div class="form-group col-sm-6">
+								<label >FV:</label>
+								<input type="text" name="txtFecha" placeholder="MM/AA" class="form-control">
+							</div>
 						</div>
-						<div class="form-group">
-							<input type="submit" name="accion" value="Pagar $.${totalPagar}0"" class="btn btn-info btn-block">
+						<div class="form-group right">
+							<input type="submit" name="accion" value="Pagar S/${totalPagar}0"" class="btn btn-info btn-block">
 						</div>
 	        		</form>
 	      		</div>

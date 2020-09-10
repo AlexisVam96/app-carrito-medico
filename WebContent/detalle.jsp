@@ -96,36 +96,42 @@
 				<h2>Detalle de mi Compra</h2>
 				<a href="Controlador?menu=home&accion=Compras">Regresar</a>
 			</div>
-			<div class="card-body text-center table-responsive">
+			<div class="card-body  table-responsive">
 				<table class="table table-hover ">
 					<thead>
 						<tr>
-							<th>Item</th>
+							<th class="text-center">Item</th>
 							<th>Producto</th>
 							<th>Precio</th>
-							<th>Cantidad</th>
+							<th class="text-center">Cantidad</th>
 							<th>Subtotal</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="det" items="${detalles}" varStatus="iterator">
 							<tr>
-								<td>00${iterator.index+1 }</td>
-								<td>${det.getNombre() }
-									<img style="display: block; margin:auto ;" src="${det.getImagen() }" width="80" height="80">
+								<td class="text-center">${iterator.index+1 }</td>
+								<td>
+									<div class="row">
+										<label class="col-sm-6">${det.getNombre() }</label>
+										<div>
+											<img style="display: block; margin:auto ;" src="${det.getImagen() }" width="80" height="80">
+										</div>
+									</div>
 								</td>
 								<td>S/${det.getPrecio() }0</td>
-								<td>${det.getCantidad() }</td>
+								<td class="text-center">${det.getCantidad() }</td>
 								<td>S/${det.getSubtotal() }0</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-			</div>
-			
-			<div class="card-footer">
-				<label style="margin-left: 1000px;">Monto Total: S/${totalPago}0 </label>
-				
+				<div class="row col-md-4 ml-auto">
+					<label class="col-sm-4 ml-auto">Monto Total:</label>
+					<div class="col-sm-6 ml-auto">
+						<input class="form-control" value="S/${totalPago }0" readonly="" >
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

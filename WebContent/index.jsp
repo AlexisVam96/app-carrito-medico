@@ -10,9 +10,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-	<!-- <link href="css/estilos.css" rel="stylesheet" type="text/css" />  -->
-
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<link rel="icon" href="img/descarga.ico"/>
 <title>Medifast: Atención rápida y segura</title>
 </head>
 <body style="font-family: serif; background-color: #F7F7F7;">
@@ -86,7 +85,7 @@
 							data-target="#myModal">${cliente.getCorreo()}</a>
 						<a class="dropdown-item"
 							href="Controlador?menu=home&accion=Compras">Mis Compras</a>
-						<a class="dropdown-item" href="./Controlador?menu=Salir"> <i
+						<a class="dropdown-item" href="#" id="btnSalir"> <i
 							class="fas fa-arrow-right"> Salir</i></a>
 					</div>
 				</li>
@@ -98,13 +97,13 @@
 		data-ride="carousel">
 		<div class="carousel-inner">
 			<div class="carousel-item">
-				<img src="img/panel3.jpg" class="d-block w-100" alt="..." height="350">
+				<img src="img/panel3.jpg" class="d-block w-100" alt="..." height="370">
 			</div>
 			<div class="carousel-item active">
-				<img src="img/panel.jpg" class="d-block w-100" alt="..."  height="350">
+				<img src="img/panel4.jpg" class="d-block w-100" alt="..."  height="370">
 			</div>
 			<div class="carousel-item">
-				<img src="img/panel2.jpg" class="d-block w-100" alt="..." height="350">
+				<img src="img/panel5.jpg" class="d-block w-100" alt="..." height="370">
 			</div>
 		</div>
 		<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"> <span
@@ -118,11 +117,11 @@
 
 
 	<div class="container mt-4">
-		<h4>${nom_categoria }</h4>
+		<h2 class="badge badge-secondary" style="font-size:x-large;">${nom_categoria }</h2>
 		<div class="row">
 			<c:forEach var="p" items="${productos}">
 				<div class="col-sm-3">
-					<div class="card mt-2" style="border: none;">
+					<div class="card mt-2 mx-2" style="border: none;">
 						<img class="mt-2" style="display: block; margin: auto;"
 							src="${p.getFoto()}" width="200" height="200">
 						<div class="card-body">
@@ -142,99 +141,61 @@
 			</c:forEach>
 		</div>
 	</div>
-
-	<!-- -MODAL DE LOGGIN -->
-
-	<div class="modal fade" id="compras" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-lg">
-			<div class="modal-content">
-				<div class="modal-body">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<div class="container mt-4">
-						<h2>Mis Compras</h2>
-						<div class="col-sm-12 col-md-12 col-xl-12" style="text-align:center;">
-							 	<table class="table table-striped table-responsive">
-							 		<thead>
-							 			<tr>
-							 				<th>CODIGO DE COMPRA</th>
-							 				<th>FECHA DE COMPRA</th>
-							 				<th>MONTO</th>
-							 				<th>CODIGO DE PAGO</th>
-							 				<th>ESTADO</th>
-							 				<th></th>
-							 			</tr>
-							 		</thead>
-							 		<tbody>
-							 			<c:forEach var="com" items="${compras}">
-							 			<tr>
-							 				<td>C00${com.getId()}</td>
-							 				<td>${com.getFecha()}</td>
-							 				<td>S/${com.getMonto()}0</td>
-							 				<td>P00${com.getIdpago()}</td>
-			 							<td>${com.getEstado()}</td>
-			 							<td><a href="Controlador?menu=home&accion=Detalle&id=${com.getId()}">ver detalle</a></td>
-			 						</tr>
-			 						</c:forEach>
-			 					</tbody>
-						 	</table>
-						</div>
-					</div>
+	
+	<footer class="footer mt-4 py-3" style=" background-color : #E4E4E4;">
+  		<div class="container mt-4">
+  			<div class="row">
+  				<div class="col-sm-3">
+  					<div class="card mt-2" style=" background-color : #E4E4E4; border: none;">
+	  					<p >Sobre Medifast</p>
+	  					<p class="text-muted">Libro de reclamaciones</p>
+	  			 		<p class="text-muted">Sobre nosotros</p>
+	  			 		<p class="text-muted">Nuestros clientes</p>
+	  			 		<p class="text-muted">Terceros encargados de tratamientos</p>
+	  			 	</div>
+  				</div>
+  				<div class="col-sm-3">
+  					<div class="card mt-2" style=" background-color : #E4E4E4; border: none;">
+  			 			<p >Medifast digital</p>
+	  					<p class="text-muted">Zonas de cobertura</p>
+	  			 		<p class="text-muted">Legales de campaña</p>
+	  			 		<p class="text-muted">Terminos y condiciones</p>
+	  			 		<p class="text-muted">Politicas de privacidad</p>
+	  			 	</div>
+  				</div>
+  				<div class="col-sm-3">
+  					<div class="card mt-2" style=" background-color : #E4E4E4; border: none;">
+  			 			<p >Contáctanos</p>
+	  					<p class="text-muted">Consultas y sugerencias</p>
+	  			 		<p class="text-muted">Call Center (Lima)- (939) 910 911</p>
+	  			 		<p class="text-muted">Medi fono (Lima) -(01) 485 9511</p>
+	  			 	</div>
+  				</div>
+  				<div class="col-sm-3">
+  					<div class="card mt-2" style="background-color : #E4E4E4; border: none;">
+  			 			<p >Síguenos</p>
+  			 			<div class="row">
+  			 				<div class="col-sm-1 mx-2">
+  			 					<p class=" h2 "><i class="fab fa-facebook-square"></i></p>
+  			 				</div>
+  			 				<div class="col-sm-1 mx-2">
+  			 					<p class="h2"><i class="fab fa-instagram"></i></p>
+  			 				</div>
+  			 			</div>
+	  					<p class="h5 mt-4"><i class="fas fa-book-open"></i> Libro de reclamaciones</p>
+	  			 	</div>
+  				</div>
+  			</div>
+  			<div class="dropdown-divider" style="background-color: #F7F7F7;"></div>
+  			<div>
+  				<div class="text-center" style="height: 40px; background-color: #E4E4E4; margin:0px; padding:0px;" >
+					<p class="navbar-text text-center text-muted" style="font-size: small;">Copyright <i class="far fa-copyright"></i>
+    					Medifast 2020 todos los derechos reservados
+  					</p>
 				</div>
-			</div>
-		</div>
-	</div>
-
-	<!--  -->
-
-	<!-- MODAL REGISTRO -->
-
-	<div class="modal fade" id="modalRegistrar" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-body">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<form action="Controlador?menu=home" method="POST">
-						<h4>Complete sus Datos</h4>
-						<div class="form-group">
-							<label>Nombres:</label> <input type="text" value=""
-								name="txtNombres" class="form-control">
-						</div>
-						<div class="form-group">
-							<label>DNI:</label> <input type="text" value="" name="txtDni"
-								class="form-control">
-						</div>
-						<div class="form-group">
-							<label>Dirección:</label> <input type="text" value=""
-								name="txtDireccion" class="form-control">
-						</div>
-						<div class="form-group">
-							<label>Email:</label> <input type="email" value=""
-								name="txtEmail" class="form-control">
-						</div>
-						<div class="form-group">
-							<label>Contraseña:</label> <input type="password" value=""
-								name="txtPassword" class="form-control">
-						</div>
-						<div class="form-group text-center">
-							<input type="submit" name="accion" value="Registrar"
-								class="btn btn-primary btn-block">
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!--  -->
-
+  			</div>
+ 		</div>
+	</footer>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -247,5 +208,8 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 		crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="js/funciones.js" type="text/javascript"></script>
 </body>
 </html>
