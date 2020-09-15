@@ -56,7 +56,8 @@
 							<a class="dropdown-item"
 								href="Controlador?menu=home&accion=Categoria&id=${c.getId() }">${c.getNombre() }</a>
 						</c:forEach>
-					</div></li>
+					</div>
+				</li>
 				<li class="nav-item"><a class="nav-link" href="#"><i
 						class="fas fa-plus-circle"></i>Ofertas del Dia</a></li>
 				<li class="nav-item"><a class="nav-link"
@@ -137,6 +138,23 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</c:forEach>
+		</div>
+	</div>
+	
+	<div class="container mt-4">
+		<div class="row">
+			<c:forEach var="c" items="${categorias}">
+				<div class="col-sm-4" style="border: none;">
+					<div class="card text-center mt-3" style="border: none; border-radius: 20px;">
+						<a class="dropdown-item"
+								href="Controlador?menu=home&accion=Categoria&id=${c.getId() }" style="border-radius: 20px; height:150px; background: #ADA996;
+							background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); 
+							background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);">
+						<h3 style="margin-top: 55px; font-size: x-large; font-family: monospace;">${c.getNombre() }</h3>	
+						</a>
+					</div>			
 				</div>
 			</c:forEach>
 		</div>

@@ -68,7 +68,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<form action="Controlador?menu=home" method="POST">
+					<form action="Controlador" method="POST">
 						<h4>Complete sus Datos</h4>
 						<div class="form-group">
 							<label>Nombres:</label> <input type="text" value=""
@@ -91,7 +91,7 @@
 								name="txtPassword" class="form-control">
 						</div>
 						<div class="form-group text-center">
-							<input type="submit" name="accion" value="Registrar"
+							<input type="submit" name="menu" value="Registrar"
 								class="btn btn-primary btn-block">
 						</div>
 					</form>

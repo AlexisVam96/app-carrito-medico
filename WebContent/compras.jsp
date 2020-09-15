@@ -25,7 +25,7 @@
 			MEDIFAST
 		</a>
 		<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin: 0 20px;">
-			<a class="dropdown-item" href="Controlador?menu=${products}&accion=Listar">${products}s</a>
+			<a class="dropdown-item" href="Controlador?menu=${products}&accion=Listar">${products}</a>
 			<a class="dropdown-item" href="Controlador?menu=home&accion=${sales}">${sales}</a>
 		</div>
 

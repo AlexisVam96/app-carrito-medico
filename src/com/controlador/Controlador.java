@@ -97,6 +97,21 @@ public class Controlador extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
+		if(menu.equals("Registrar")) {
+			String nom=request.getParameter("txtNombres");
+			String dni=request.getParameter("txtDni");
+			String direccion=request.getParameter("txtDireccion");
+			String correo=request.getParameter("txtEmail");
+			String password=request.getParameter("txtPassword");
+			Cliente cl=new Cliente();
+			cl.setNombre(nom);
+			cl.setPassword(password);
+			cl.setCorreo(correo);
+			cl.setDireccion(direccion);
+			cl.setDni(dni);
+			clienteDao.agregar(cl);
+		}
+		
 		if(menu.equals("Login")) {
 			String user=request.getParameter("txtCorreo");
 			String pass=request.getParameter("txtPass");
@@ -339,31 +354,6 @@ public class Controlador extends HttpServlet {
 						listaCarrito=new ArrayList<Carrito>();
 						request.getRequestDispatcher("Controlador?menu=home&accion=Listar").forward(request, response);
 						break;
-					case "Pagar":
-						//String tarjeta= request.getParameter("txtTarjeta");
-						//String codigo=request.getParameter("txtCodigo");
-						//pago.setTarjeta(tarjeta);
-						//pago.setCod_seguridad(codigo);
-						pago.setMonto(totalPagar);
-						pagodao.agregar(pago);
-						pago1=pagodao.listarXtarjeta(pago.getTarjeta());
-						request.getRequestDispatcher("Controlador?menu=home&accion=Carrito").forward(request, response);
-						break;
-					case "Registrar":
-						String nom=request.getParameter("txtNombres");
-						String dni=request.getParameter("txtDni");
-						String direccion=request.getParameter("txtDireccion");
-						String correo=request.getParameter("txtEmail");
-						String password=request.getParameter("txtPassword");
-						Cliente cl=new Cliente();
-						cl.setNombre(nom);
-						cl.setPassword(password);
-						cl.setCorreo(correo);
-						cl.setDireccion(direccion);
-						cl.setDni(dni);
-						clienteDao.agregar(cl);
-						request.getRequestDispatcher("Controlador?menu=home&accion=Listar").forward(request, response);
-						break;
 					case "GenerarCompra":
 						String tarjeta= request.getParameter("txtTarjeta");
 						String codigo=request.getParameter("txtCodigo");
@@ -387,7 +377,6 @@ public class Controlador extends HttpServlet {
 						System.out.println(cliente.getDireccion());
 						CompraDao dao=new CompraDao();
 						Compra compra=new Compra(cliente.getId(),pago1.getId() , FechaHora.fechaHoraBD(), totalPagar, "Cancelado", cliente.getDireccion() , listaCarrito);
-						//Compra compra=new Compra(cliente.getId(),pago1.getId(), FechaHora.fechaHoraBD(), totalPagar, "Cancelado", listaCarrito);
 						int res=dao.GenerarCompra(compra);
 						if (res!=0&&totalPagar>0) {
 							request.getRequestDispatcher("mensaje.jsp").forward(request, response);
@@ -421,10 +410,14 @@ public class Controlador extends HttpServlet {
 		                    List<FileItem> items = fileUpload.parseRequest(request);
 		                    for (int i = 0; i < items.size(); i++) {
 		                        FileItem fileItem = (FileItem) items.get(i);
-		                        if (!fileItem.isFormField()) {
-		                            File f = new File("C:\\xampp\\htdocs\\img\\" + fileItem.getName());
+		                        if (!fileItem.isFormField()) {		                    
+		                        	String relativeWebPath = "/img";
+		                        	String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath);
+		                            File f = new File(absoluteDiskPath , fileItem.getName());
 		                            fileItem.write(f);
-		                            p.setFoto("http://localhost/img/"+fileItem.getName());
+		                            p.setFoto(getServletContext().getContextPath() + "/img/" + fileItem.getName());
+		                            //System.out.println("ruta: " + p.getFoto());
+		                            //System.out.println("Logica para subir imagen en el servidor tomcat: "+ absoluteDiskPath);
 		                        } else {
 		                            lista.add(fileItem.getString());
 		                        }
@@ -436,6 +429,7 @@ public class Controlador extends HttpServlet {
 		                    p.setId_categoria(Integer.parseInt(lista.get(4)));
 		                    pdao.agregar(p);
 		                } catch (Exception e) {
+		                	System.out.println(e.getMessage());
 		                }
 						
 						request.getRequestDispatcher("Controlador?menu=Producto&accion=Listar").forward(request, response);
@@ -499,9 +493,11 @@ public class Controlador extends HttpServlet {
 		                    for (int i = 0; i < items.size(); i++) {
 		                        FileItem fileItem = (FileItem) items.get(i);
 		                        if (!fileItem.isFormField()) {
-		                            File f = new File("C:\\xampp\\htdocs\\img\\" + fileItem.getName());
+		                        	String relativeWebPath = "/img";
+		                        	String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath);
+		                            File f = new File(absoluteDiskPath , fileItem.getName());
 		                            fileItem.write(f);
-		                            p.setFoto("http://localhost/img/"+fileItem.getName());
+		                            p.setFoto(getServletContext().getContextPath() + "/img/" + fileItem.getName());
 		                        } else {
 		                            lista1.add(fileItem.getString());
 		                        }
