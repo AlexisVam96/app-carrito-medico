@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -93,7 +94,8 @@
 			</ul>
 		</div>
 	</nav>
-
+	
+<!-- 
 	<div id="carouselExampleControls" class="carousel slide"
 		data-ride="carousel">
 		<div class="carousel-inner">
@@ -115,7 +117,7 @@
 			class="sr-only">Next</span>
 		</a>
 	</div>
-
+-->
 
 	<div class="container mt-4">
 		<h2 class="badge badge-secondary" style="font-size:x-large;">${nom_categoria }</h2>
@@ -226,6 +228,7 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 		crossorigin="anonymous"></script>
+		
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/funciones.js" type="text/javascript"></script>

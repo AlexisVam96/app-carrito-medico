@@ -5,6 +5,7 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">	
 	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 	<link rel="icon" href="img/descarga.ico"/>
@@ -92,8 +93,8 @@
 		<div class="card col-sm-12" style="padding:0; margin:0;">
 			<div class="card-header">
 				<h2>Nuestros Productos</h2>
-				<a href="#" class="btn btn-success" data-toggle="modal" data-target="#agregarProducto">Agregar Producto</a>
-				<a href="#" class="btn btn-info" data-toggle="modal" data-target="#categoria">Agregar Categoria</a>
+				<a href="#" class="btn btn-success mt-2" data-toggle="modal" data-target="#agregarProducto">Agregar Producto</a>
+				<a href="#" class="btn btn-info mt-2" data-toggle="modal" data-target="#categoria">Agregar Categoria</a>
 			</div>
 			<div class="card-body text-center">
 				<table class="table table-striped table-responsive" id="myTable">
@@ -118,9 +119,9 @@
 						<td>S/${pro.getPrecio()}0</td>	
 						<td>${pro.getStock()}</td>	
 						<td>
-							<a class="btn btn-warning" href="Controlador?menu=Producto&accion=Editar&id=${pro.getId()}" >Editar</a>
+							<a class="btn btn-warning mt-1" href="Controlador?menu=Producto&accion=Editar&id=${pro.getId()}" >Editar</a>
 							<input type="hidden" id="idp" value="${pro.getId()}">
-							<a class="btn btn-danger" href="#" id="btnDeleteProducto">Delete</a>
+							<a class="btn btn-danger mt-1" href="#" id="btnDeleteProducto">Delete</a>
 						</td>
 					</tr>
 					</c:forEach>
