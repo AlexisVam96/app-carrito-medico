@@ -132,7 +132,7 @@ public class Controlador extends HttpServlet {
 				String info="correo y/o password incorrecto";
 				request.setAttribute("danger", "danger");
 				request.setAttribute("info", info);
-				request.getRequestDispatcher("login.jsp").include(request, response);
+				request.getRequestDispatcher("index.jsp").include(request, response);
 			}
 			
 		}
@@ -156,7 +156,7 @@ public class Controlador extends HttpServlet {
 						String texto = request.getParameter("txtBuscar");
 						List<Producto> productos = pdao.bucar(texto);
 						request.setAttribute("productos", productos);
-						request.getRequestDispatcher("index.jsp").forward(request, response);
+						request.getRequestDispatcher("vistas/principal.jsp").forward(request, response);
 					break;
 					case "EliminarCategoria" :
 						int id_category = Integer.parseInt(request.getParameter("id"));
@@ -173,14 +173,14 @@ public class Controlador extends HttpServlet {
 						ventas=comDao.listar_compras();
 						request.setAttribute("ventas", ventas);
 						request.setAttribute("cliente", cliente);
-						request.getRequestDispatcher("ventas.jsp").forward(request, response);
+						request.getRequestDispatcher("vistas/ventas.jsp").forward(request, response);
 					break;
 						
 					case "Compras":
 						compras=comDao.listar_compras_id(cliente.getId());
 						request.setAttribute("compras", compras);
 						request.setAttribute("cliente", cliente);
-						request.getRequestDispatcher("compras.jsp").forward(request, response);
+						request.getRequestDispatcher("vistas/compras.jsp").forward(request, response);
 					break;
 					case "Detalle":
 						double totalPago=0;
@@ -192,7 +192,7 @@ public class Controlador extends HttpServlet {
 						request.setAttribute("totalPago", totalPago);
 						request.setAttribute("detalles", detalles);
 						request.setAttribute("cliente", cliente);
-						request.getRequestDispatcher("detalle.jsp").forward(request, response);
+						request.getRequestDispatcher("vistas/detalle.jsp").forward(request, response);
 						
 					break;
 					case "Listar":
@@ -348,7 +348,7 @@ public class Controlador extends HttpServlet {
 						request.setAttribute("carrito", listaCarrito);
 						request.setAttribute("totalPagar", totalPagar);
 						request.setAttribute("categorias", categorias);
-						request.getRequestDispatcher("carrito.jsp").forward(request, response);
+						request.getRequestDispatcher("vistas/carrito.jsp").forward(request, response);
 						break;
 					case "Nuevo":
 						listaCarrito=new ArrayList<Carrito>();
@@ -379,16 +379,16 @@ public class Controlador extends HttpServlet {
 						Compra compra=new Compra(cliente.getId(),pago1.getId() , FechaHora.fechaHoraBD(), totalPagar, "Cancelado", cliente.getDireccion() , listaCarrito);
 						int res=dao.GenerarCompra(compra);
 						if (res!=0&&totalPagar>0) {
-							request.getRequestDispatcher("mensaje.jsp").forward(request, response);
+							request.getRequestDispatcher("vistas/mensaje.jsp").forward(request, response);
 						}else {
-							request.getRequestDispatcher("error.jsp").forward(request, response);
+							request.getRequestDispatcher("vistas/error.jsp").forward(request, response);
 						}
 						break;
 					default:
 						throw new AssertionError();
 				
 				}	
-					request.getRequestDispatcher("index.jsp").include(request, response);
+					request.getRequestDispatcher("vistas/principal.jsp").include(request, response);
 			}
 			
 			if(menu.equals("Producto")) {
@@ -475,7 +475,7 @@ public class Controlador extends HttpServlet {
 					default:
 						throw new AssertionError();
 				}
-				request.getRequestDispatcher("producto.jsp").include(request, response);
+				request.getRequestDispatcher("vistas/producto.jsp").include(request, response);
 			}
 			
 			if(menu.equals("ActualizarProducto")) {
@@ -516,12 +516,12 @@ public class Controlador extends HttpServlet {
 					default:
 						break;
 					}
-				request.getRequestDispatcher("actualizarProducto.jsp").include(request, response);
+				request.getRequestDispatcher("vistas/actualizarProducto.jsp").include(request, response);
 			}
 			
 			
 		}else {
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		
 		

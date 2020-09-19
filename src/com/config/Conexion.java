@@ -9,9 +9,9 @@ public class Conexion {
 	//String user="root";
 	//String pass="root";
 	
-	String url= "jdbc:mysql://bijvhlrivyj0vjydczqe-mysql.services.clever-cloud.com:3306/bijvhlrivyj0vjydczqe?useSSL=false";
-	String user="ulh4lpnjdrlrqadq";
-	String pass="A5kOGzsGlFfvHUteUzIx";
+	String url= "jdbc:mysql://nwhazdrp7hdpd4a4.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/lwyfaxy3th7es6l9?useSSL=false";
+	String user="gxjnymeb9oacejp0";
+	String pass="ahwd3ymwkohefjho";
 	Connection con = null;
 	public Connection getConnection() {
 		
